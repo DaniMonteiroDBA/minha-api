@@ -1,0 +1,639 @@
+# Ruleset Spectral — API de Gestão de Clientes
+# Compatível com OpenAPI 3.x e projetado para validar o contrato API First.
+#
+# Uso:
+#   npx @stoplight/spectral-cli lint openapi.yaml --ruleset spectral-gestao-clientes.yaml
+#
+# Renomeie este arquivo para .spectral.yaml caso deseje que o Spectral
+# o descubra automaticamente no diretório do projeto.
+
+extends:
+  - spectral:oas
+
+formats:
+  - oas3
+
+parserOptions:
+  duplicateKeys: error
+  incompatibleValues: error
+
+rules:
+
+  # ============================================================
+  # GOVERNANÇA E DOCUMENTAÇÃO
+  # ============================================================
+
+  clientes-info-version-semver:
+    description: A versão da API deve seguir versionamento semântico.
+    message: "info.version deve usar o formato X.Y ou X.Y.Z, por exemplo 1.0 ou 1.0.0."
+    severity: error
+    given: "$"
+    then:
+      field: info.version
+      function: pattern
+      functionOptions:
+        match: "^[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$"
+
+  clientes-api-first-documentado:
+    description: O contrato deve declarar a adoção da metodologia API First.
+    message: "info.description deve mencionar explicitamente API First."
+    severity: warn
+    given: "$"
+    then:
+      field: info.description
+      function: pattern
+      functionOptions:
+        match: "(?i)API[ -]?First"
+
+  clientes-paths-minusculos:
+    description: Os caminhos devem usar letras minúsculas e recursos no plural.
+    message: "O caminho deve ser minúsculo, sem barra final e usar o recurso /clientes."
+    severity: error
+    given: "$.paths"
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        match: "^/clientes(?:/\\{[a-z][A-Za-z0-9]*\\})?$"
+
+  clientes-operation-id-camel-case:
+    description: operationId deve usar lowerCamelCase.
+    message: "operationId deve usar lowerCamelCase, por exemplo consultarClientePorId."
+    severity: error
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: pattern
+      functionOptions:
+        match: "^[a-z][A-Za-z0-9]*$"
+
+  clientes-operacao-com-summary:
+    description: Toda operação deve possuir um resumo.
+    message: "A operação deve declarar summary."
+    severity: error
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: summary
+      function: truthy
+
+  clientes-operacao-com-description:
+    description: Toda operação deve explicar comportamento, segurança e resultado.
+    message: "A operação deve declarar description."
+    severity: warn
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: description
+      function: truthy
+
+  clientes-operacao-com-tag:
+    description: Toda operação deve pertencer a uma tag documentada.
+    message: "A operação deve declarar pelo menos uma tag."
+    severity: error
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          minItems: 1
+          items:
+            type: string
+
+  # ============================================================
+  # AUTENTICAÇÃO JWT E AUTORIZAÇÃO POR SCOPES
+  # ============================================================
+
+  clientes-bearer-auth-definido:
+    description: O contrato deve definir autenticação HTTP Bearer com JWT.
+    message: "components.securitySchemes.bearerAuth deve usar type=http, scheme=bearer e bearerFormat=JWT."
+    severity: error
+    given: "$"
+    then:
+      field: components.securitySchemes.bearerAuth
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - type
+            - scheme
+            - bearerFormat
+          properties:
+            type:
+              const: http
+            scheme:
+              type: string
+              pattern: "^[Bb]earer$"
+            bearerFormat:
+              type: string
+              pattern: "^[Jj][Ww][Tt]$"
+
+  clientes-seguranca-em-todas-operacoes:
+    description: Todos os endpoints devem exigir o esquema bearerAuth.
+    message: "A operação deve declarar security com bearerAuth."
+    severity: error
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: security
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            required:
+              - bearerAuth
+            properties:
+              bearerAuth:
+                type: array
+
+  clientes-scope-obrigatorio:
+    description: Toda operação deve documentar o scope exigido.
+    message: "Declare x-required-scope com clientes.read, clientes.write ou clientes.delete."
+    severity: error
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: x-required-scope
+      function: truthy
+
+  clientes-scope-valido:
+    description: Apenas os scopes previstos no contrato podem ser utilizados.
+    message: "Scope inválido. Use clientes.read, clientes.write ou clientes.delete."
+    severity: error
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: x-required-scope
+      function: pattern
+      functionOptions:
+        match: "^clientes\\.(read|write|delete)$"
+
+  clientes-get-usa-read:
+    description: Operações GET devem exigir clientes.read.
+    message: "Endpoints GET devem usar x-required-scope: clientes.read."
+    severity: error
+    given: "$.paths.*.get"
+    then:
+      field: x-required-scope
+      function: pattern
+      functionOptions:
+        match: "^clientes\\.read$"
+
+  clientes-post-usa-write:
+    description: Operações POST devem exigir clientes.write.
+    message: "Endpoints POST devem usar x-required-scope: clientes.write."
+    severity: error
+    given: "$.paths.*.post"
+    then:
+      field: x-required-scope
+      function: pattern
+      functionOptions:
+        match: "^clientes\\.write$"
+
+  clientes-put-usa-write:
+    description: Operações PUT devem exigir clientes.write.
+    message: "Endpoints PUT devem usar x-required-scope: clientes.write."
+    severity: error
+    given: "$.paths.*.put"
+    then:
+      field: x-required-scope
+      function: pattern
+      functionOptions:
+        match: "^clientes\\.write$"
+
+  clientes-patch-usa-write:
+    description: Operações PATCH devem exigir clientes.write.
+    message: "Endpoints PATCH devem usar x-required-scope: clientes.write."
+    severity: error
+    given: "$.paths.*.patch"
+    then:
+      field: x-required-scope
+      function: pattern
+      functionOptions:
+        match: "^clientes\\.write$"
+
+  clientes-delete-usa-delete:
+    description: Operações DELETE devem exigir clientes.delete.
+    message: "Endpoints DELETE devem usar x-required-scope: clientes.delete."
+    severity: error
+    given: "$.paths.*.delete"
+    then:
+      field: x-required-scope
+      function: pattern
+      functionOptions:
+        match: "^clientes\\.delete$"
+
+  # ============================================================
+  # CÓDIGOS HTTP OBRIGATÓRIOS
+  # ============================================================
+
+  clientes-respostas-seguranca-e-servidor:
+    description: Toda operação protegida deve documentar 401, 403 e 500.
+    message: "A operação deve declarar as respostas 401, 403 e 500."
+    severity: error
+    given: "$.paths.*[get,post,put,patch,delete]"
+    then:
+      field: responses
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - "401"
+            - "403"
+            - "500"
+
+  clientes-get-resposta-200:
+    description: Consultas devem documentar sucesso com HTTP 200.
+    message: "Operações GET devem declarar a resposta 200."
+    severity: error
+    given: "$.paths.*.get"
+    then:
+      field: responses
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - "200"
+
+  clientes-post-respostas-201-e-400:
+    description: Cadastros devem documentar criação e erro de validação.
+    message: "Operações POST devem declarar as respostas 201 e 400."
+    severity: error
+    given: "$.paths.*.post"
+    then:
+      field: responses
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - "201"
+            - "400"
+
+  clientes-put-respostas-200-400-404:
+    description: Atualizações devem documentar sucesso, validação e recurso inexistente.
+    message: "Operações PUT devem declarar as respostas 200, 400 e 404."
+    severity: error
+    given: "$.paths.*.put"
+    then:
+      field: responses
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - "200"
+            - "400"
+            - "404"
+
+  clientes-delete-respostas-200-404:
+    description: Remoções devem documentar sucesso e recurso inexistente.
+    message: "Operações DELETE devem declarar as respostas 200 e 404."
+    severity: error
+    given: "$.paths.*.delete"
+    then:
+      field: responses
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - "200"
+            - "404"
+
+  clientes-operacoes-por-id-com-404:
+    description: Operações sobre /clientes/{id} devem documentar cliente inexistente.
+    message: "Operações em /clientes/{id} devem declarar a resposta 404."
+    severity: error
+    given: "$.paths['/clientes/{id}'][get,put,patch,delete]"
+    then:
+      field: responses
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - "404"
+
+  # ============================================================
+  # REFERÊNCIAS PADRONIZADAS DE ERRO
+  # ============================================================
+
+  clientes-401-padronizado:
+    description: Respostas 401 devem reutilizar a definição NaoAutenticado.
+    message: "A resposta 401 deve referenciar #/components/responses/NaoAutenticado."
+    severity: error
+    resolved: false
+    given: "$.paths..responses['401']"
+    then:
+      field: "$ref"
+      function: pattern
+      functionOptions:
+        match: "^#/components/responses/NaoAutenticado$"
+
+  clientes-403-padronizado:
+    description: Respostas 403 devem reutilizar a definição AcessoNegado.
+    message: "A resposta 403 deve referenciar #/components/responses/AcessoNegado."
+    severity: error
+    resolved: false
+    given: "$.paths..responses['403']"
+    then:
+      field: "$ref"
+      function: pattern
+      functionOptions:
+        match: "^#/components/responses/AcessoNegado$"
+
+  clientes-404-padronizado:
+    description: Respostas 404 devem reutilizar a definição ClienteNaoEncontrado.
+    message: "A resposta 404 deve referenciar #/components/responses/ClienteNaoEncontrado."
+    severity: error
+    resolved: false
+    given: "$.paths..responses['404']"
+    then:
+      field: "$ref"
+      function: pattern
+      functionOptions:
+        match: "^#/components/responses/ClienteNaoEncontrado$"
+
+  clientes-500-padronizado:
+    description: Respostas 500 devem reutilizar a definição ErroInterno.
+    message: "A resposta 500 deve referenciar #/components/responses/ErroInterno."
+    severity: error
+    resolved: false
+    given: "$.paths..responses['500']"
+    then:
+      field: "$ref"
+      function: pattern
+      functionOptions:
+        match: "^#/components/responses/ErroInterno$"
+
+  clientes-erros-inline-usam-envelope:
+    description: Erros inline devem reutilizar o schema RespostaErro.
+    message: "Respostas de erro inline devem usar #/components/schemas/RespostaErro."
+    severity: error
+    resolved: false
+    given:
+      - "$.paths..responses['400'].content['application/json'].schema"
+      - "$.components.responses.*.content['application/json'].schema"
+    then:
+      field: "$ref"
+      function: pattern
+      functionOptions:
+        match: "^#/components/schemas/RespostaErro$"
+
+  # ============================================================
+  # ENVELOPES DE RESPOSTA
+  # ============================================================
+
+  clientes-envelope-erro-campos:
+    description: O envelope de erro deve exigir success e message.
+    message: "RespostaErro.required deve conter success e message."
+    severity: error
+    given: "$.components.schemas.RespostaErro.required"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          allOf:
+            - contains:
+                const: success
+            - contains:
+                const: message
+
+  clientes-envelope-erro-success-false:
+    description: O campo success do envelope de erro deve aceitar somente false.
+    message: "RespostaErro.properties.success.enum deve conter somente false."
+    severity: error
+    given: "$.components.schemas.RespostaErro.properties.success.enum"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          minItems: 1
+          maxItems: 1
+          items:
+            const: false
+
+  clientes-envelopes-sucesso-campos:
+    description: Envelopes de sucesso devem exigir success, message e data.
+    message: "Todo envelope de sucesso deve exigir success, message e data."
+    severity: error
+    given:
+      - "$.components.schemas.RespostaCliente.required"
+      - "$.components.schemas.RespostaListaClientes.required"
+      - "$.components.schemas.RespostaSucessoSemDados.required"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          allOf:
+            - contains:
+                const: success
+            - contains:
+                const: message
+            - contains:
+                const: data
+
+  clientes-envelopes-sucesso-true:
+    description: O campo success dos envelopes de sucesso deve aceitar somente true.
+    message: "O enum de success nos envelopes de sucesso deve conter somente true."
+    severity: error
+    given:
+      - "$.components.schemas.RespostaCliente.properties.success.enum"
+      - "$.components.schemas.RespostaListaClientes.properties.success.enum"
+      - "$.components.schemas.RespostaSucessoSemDados.properties.success.enum"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          minItems: 1
+          maxItems: 1
+          items:
+            const: true
+
+  clientes-get-200-envelope:
+    description: Respostas 200 de consulta devem utilizar um envelope conhecido.
+    message: "GET 200 deve usar RespostaCliente ou RespostaListaClientes."
+    severity: error
+    resolved: false
+    given: "$.paths.*.get.responses['200'].content['application/json'].schema"
+    then:
+      field: "$ref"
+      function: pattern
+      functionOptions:
+        match: "^#/components/schemas/Resposta(Cliente|ListaClientes)$"
+
+  clientes-post-201-envelope:
+    description: Respostas 201 devem utilizar RespostaCliente.
+    message: "POST 201 deve usar #/components/schemas/RespostaCliente."
+    severity: error
+    resolved: false
+    given: "$.paths.*.post.responses['201'].content['application/json'].schema"
+    then:
+      field: "$ref"
+      function: pattern
+      functionOptions:
+        match: "^#/components/schemas/RespostaCliente$"
+
+  clientes-put-200-envelope:
+    description: Respostas 200 de atualização devem utilizar RespostaCliente.
+    message: "PUT 200 deve usar #/components/schemas/RespostaCliente."
+    severity: error
+    resolved: false
+    given: "$.paths.*.put.responses['200'].content['application/json'].schema"
+    then:
+      field: "$ref"
+      function: pattern
+      functionOptions:
+        match: "^#/components/schemas/RespostaCliente$"
+
+  clientes-delete-200-envelope:
+    description: Respostas 200 de remoção devem utilizar o envelope sem dados.
+    message: "DELETE 200 deve usar #/components/schemas/RespostaSucessoSemDados."
+    severity: error
+    resolved: false
+    given: "$.paths.*.delete.responses['200'].content['application/json'].schema"
+    then:
+      field: "$ref"
+      function: pattern
+      functionOptions:
+        match: "^#/components/schemas/RespostaSucessoSemDados$"
+
+  # ============================================================
+  # MODELAGEM E VALIDAÇÃO DOS DADOS
+  # ============================================================
+
+  clientes-id-inteiro-positivo:
+    description: O parâmetro id deve ser um inteiro positivo.
+    message: "O parâmetro id deve usar type=integer e minimum=1."
+    severity: error
+    given: "$.components.parameters.ClienteId.schema"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - type
+            - minimum
+          properties:
+            type:
+              const: integer
+            minimum:
+              type: number
+              minimum: 1
+
+  clientes-cpf-entrada-com-pattern:
+    description: O CPF de entrada deve declarar validação estrutural.
+    message: "ClienteEntrada.properties.cpf deve declarar um pattern."
+    severity: error
+    given: "$.components.schemas.ClienteEntrada.properties.cpf"
+    then:
+      field: pattern
+      function: truthy
+
+  clientes-email-com-format:
+    description: O e-mail de entrada deve utilizar format email.
+    message: "ClienteEntrada.properties.email deve declarar format: email."
+    severity: error
+    given: "$.components.schemas.ClienteEntrada.properties.email"
+    then:
+      field: format
+      function: pattern
+      functionOptions:
+        match: "^email$"
+
+  clientes-objetos-sem-propriedades-extras:
+    description: Os schemas principais devem bloquear propriedades não previstas.
+    message: "O schema deve declarar additionalProperties: false."
+    severity: warn
+    given:
+      - "$.components.schemas.ClienteEntrada"
+      - "$.components.schemas.Cliente"
+      - "$.components.schemas.RespostaCliente"
+      - "$.components.schemas.RespostaListaClientes"
+      - "$.components.schemas.RespostaErro"
+    then:
+      field: additionalProperties
+      function: falsy
+
+  # ============================================================
+  # MASCARAMENTO E PROTEÇÃO DE DADOS SENSÍVEIS
+  # ============================================================
+
+  clientes-cpf-resposta-read-only:
+    description: O CPF retornado deve ser uma representação mascarada somente de leitura.
+    message: "Cliente.properties.cpf deve declarar readOnly: true."
+    severity: error
+    given: "$.components.schemas.Cliente.properties.cpf"
+    then:
+      field: readOnly
+      function: truthy
+
+  clientes-telefone-resposta-read-only:
+    description: O telefone retornado deve ser uma representação mascarada somente de leitura.
+    message: "Cliente.properties.telefone deve declarar readOnly: true."
+    severity: error
+    given: "$.components.schemas.Cliente.properties.telefone"
+    then:
+      field: readOnly
+      function: truthy
+
+  clientes-email-resposta-read-only:
+    description: O e-mail retornado deve ser uma representação mascarada somente de leitura.
+    message: "Cliente.properties.email deve declarar readOnly: true."
+    severity: error
+    given: "$.components.schemas.Cliente.properties.email"
+    then:
+      field: readOnly
+      function: truthy
+
+  clientes-cpf-exemplo-mascarado:
+    description: O exemplo de CPF retornado deve estar parcialmente mascarado.
+    message: "Use um CPF mascarado no formato ***.456.789-**."
+    severity: error
+    given: "$.components.schemas.Cliente.properties.cpf.example"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^\\*{3}\\.\\d{3}\\.\\d{3}-\\*{2}$"
+
+  clientes-telefone-exemplo-mascarado:
+    description: O exemplo de telefone retornado deve estar parcialmente mascarado.
+    message: "Use um telefone mascarado no formato (11) *****-4321."
+    severity: error
+    given: "$.components.schemas.Cliente.properties.telefone.example"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^\\(\\d{2}\\) \\*{5}-\\d{4}$"
+
+  clientes-email-exemplo-mascarado:
+    description: O exemplo de e-mail retornado deve estar parcialmente mascarado.
+    message: "Use um e-mail parcialmente mascarado, por exemplo a***@empresa.com."
+    severity: error
+    given: "$.components.schemas.Cliente.properties.email.example"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[^@*]+\\*+@[^@\\s]+\\.[^@\\s]+$"
+
+  clientes-nao-expor-segredos:
+    description: Senhas, tokens e credenciais não podem fazer parte dos schemas da API.
+    message: "Remova propriedades sensíveis como senha, password, token, accessToken ou refreshToken."
+    severity: error
+    given:
+      - "$.components.schemas..properties.senha"
+      - "$.components.schemas..properties.password"
+      - "$.components.schemas..properties.token"
+      - "$.components.schemas..properties.accessToken"
+      - "$.components.schemas..properties.refreshToken"
+    then:
+      function: undefined
