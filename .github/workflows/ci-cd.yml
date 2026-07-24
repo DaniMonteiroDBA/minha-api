@@ -9,6 +9,7 @@ on:
 
 jobs:
 
+
   # ─── JOB 2: Publicar documentação ───
   # Só roda se o job "validar" passou!
   publicar-docs:
