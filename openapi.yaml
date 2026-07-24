@@ -2,378 +2,182 @@ openapi: 3.0.3
 
 info:
   title: API de Gestão de Clientes
+  version: "1.0.0"
   description: |
-    API responsável pelo cadastro, consulta, atualização e remoção de clientes.
-
-    Esta API utiliza a metodologia API First: o contrato é definido antes
-    da implementação do código.
-
-    ## Autenticação
-
-    Todos os endpoints exigem um token JWT válido enviado no cabeçalho:
-
-    Authorization: Bearer {token}
-
-    ## Autorização por escopos
-
-    Além de estar autenticado, o usuário deve possuir o escopo necessário
-    para executar cada operação:
-
-    - clientes.read: consultar clientes;
-    - clientes.write: cadastrar ou atualizar clientes;
-    - clientes.delete: remover clientes.
-
-    ## Mascaramento de dados
-
-    Os dados sensíveis devem ser mascarados antes de serem retornados:
-
-    - nome: exibido integralmente;
-    - CPF: exibido parcialmente;
-    - telefone: exibido parcialmente;
-    - e-mail: exibido parcialmente;
-    - senha, token e credenciais: nunca devem ser retornados.
-
-  version: "1.0"
+    API para cadastro, consulta, atualização e remoção de clientes.
+    O contrato adota a metodologia API First: a interface da API é
+    definida e validada antes da implementação.
 
 servers:
-  - url: https://api.exemplo.com/v1
-    description: Servidor de produção
-
   - url: http://localhost:8080/v1
-    description: Servidor de desenvolvimento
+    description: Ambiente de desenvolvimento
+  - url: https://api.exemplo.com/v1
+    description: Ambiente de produção
 
 tags:
   - name: Clientes
-    description: Operações relacionadas à gestão de clientes
+    description: Gestão de clientes
 
 paths:
-
   /clientes:
-
     get:
-      tags:
-        - Clientes
+      tags: [Clientes]
       summary: Listar clientes
-      description: |
-        Retorna a lista de clientes cadastrados.
-
-        Exige autenticação por token JWT e o escopo `clientes.read`.
-        Os dados sensíveis são retornados de forma parcialmente mascarada.
+      description: Lista os clientes com dados sensíveis parcialmente mascarados.
       operationId: listarClientes
-
       security:
         - bearerAuth: []
-
       x-required-scope: clientes.read
-
       responses:
-
         "200":
-          description: Lista de clientes consultada com sucesso
+          description: Clientes consultados com sucesso
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/RespostaListaClientes"
-              example:
-                success: true
-                message: Clientes consultados com sucesso.
-                data:
-                  - id: 101
-                    nome: Ana Carolina Souza
-                    cpf: "***.456.789-**"
-                    telefone: "(11) *****-4321"
-                    email: "a***@empresa.com"
-                    status: ATIVO
-                    criadoEm: "2026-07-21T14:30:00Z"
-
-                  - id: 102
-                    nome: Carlos Henrique Lima
-                    cpf: "***.987.654-**"
-                    telefone: "(21) *****-7890"
-                    email: "c***@exemplo.com"
-                    status: ATIVO
-                    criadoEm: "2026-07-21T15:00:00Z"
-
         "401":
           $ref: "#/components/responses/NaoAutenticado"
-
         "403":
           $ref: "#/components/responses/AcessoNegado"
-
         "500":
           $ref: "#/components/responses/ErroInterno"
 
     post:
-      tags:
-        - Clientes
+      tags: [Clientes]
       summary: Cadastrar cliente
-      description: |
-        Cadastra um novo cliente.
-
-        Exige autenticação por token JWT e o escopo `clientes.write`.
-
-        O CPF deve possuir um formato válido e não pode estar cadastrado
-        anteriormente.
+      description: Cadastra um cliente usando dados validados.
       operationId: cadastrarCliente
-
       security:
         - bearerAuth: []
-
       x-required-scope: clientes.write
-
       requestBody:
         required: true
-        description: Dados necessários para o cadastro do cliente
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/ClienteEntrada"
-            example:
-              nome: Ana Carolina Souza
-              cpf: "123.456.789-00"
-              telefone: "11987654321"
-              email: ana.souza@empresa.com
-              status: ATIVO
-
       responses:
-
         "201":
           description: Cliente cadastrado com sucesso
           headers:
             Location:
-              description: Endereço do cliente criado
+              description: URI do cliente criado
               schema:
                 type: string
-                example: /clientes/101
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/RespostaCliente"
-              example:
-                success: true
-                message: Cliente cadastrado com sucesso.
-                data:
-                  id: 101
-                  nome: Ana Carolina Souza
-                  cpf: "***.456.789-**"
-                  telefone: "(11) *****-4321"
-                  email: "a***@empresa.com"
-                  status: ATIVO
-                  criadoEm: "2026-07-21T14:30:00Z"
-
         "400":
           description: Dados enviados em formato inválido
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/RespostaErro"
-              examples:
-                cpfInvalido:
-                  summary: CPF em formato inválido
-                  value:
-                    success: false
-                    message: O CPF informado possui formato inválido.
-
-                camposObrigatorios:
-                  summary: Campo obrigatório não informado
-                  value:
-                    success: false
-                    message: O campo nome é obrigatório.
-
         "401":
           $ref: "#/components/responses/NaoAutenticado"
-
         "403":
           $ref: "#/components/responses/AcessoNegado"
-
         "500":
           $ref: "#/components/responses/ErroInterno"
 
   /clientes/{id}:
-
     parameters:
       - $ref: "#/components/parameters/ClienteId"
 
     get:
-      tags:
-        - Clientes
+      tags: [Clientes]
       summary: Consultar cliente por ID
-      description: |
-        Retorna um cliente específico.
-
-        Exige autenticação por token JWT e o escopo `clientes.read`.
-        Os dados sensíveis são retornados de forma parcialmente mascarada.
+      description: Consulta um cliente com dados sensíveis parcialmente mascarados.
       operationId: consultarClientePorId
-
       security:
         - bearerAuth: []
-
       x-required-scope: clientes.read
-
       responses:
-
         "200":
           description: Cliente consultado com sucesso
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/RespostaCliente"
-              example:
-                success: true
-                message: Cliente consultado com sucesso.
-                data:
-                  id: 101
-                  nome: Ana Carolina Souza
-                  cpf: "***.456.789-**"
-                  telefone: "(11) *****-4321"
-                  email: "a***@empresa.com"
-                  status: ATIVO
-                  criadoEm: "2026-07-21T14:30:00Z"
-
         "401":
           $ref: "#/components/responses/NaoAutenticado"
-
         "403":
           $ref: "#/components/responses/AcessoNegado"
-
         "404":
           $ref: "#/components/responses/ClienteNaoEncontrado"
-
         "500":
           $ref: "#/components/responses/ErroInterno"
 
     put:
-      tags:
-        - Clientes
+      tags: [Clientes]
       summary: Atualizar cliente
-      description: |
-        Atualiza os dados de um cliente existente.
-
-        Exige autenticação por token JWT e o escopo `clientes.write`.
-
-        Por utilizar o método PUT, o corpo da requisição deve representar
-        o conjunto completo de dados atualizáveis do cliente.
+      description: Atualiza todos os dados editáveis de um cliente existente.
       operationId: atualizarCliente
-
       security:
         - bearerAuth: []
-
       x-required-scope: clientes.write
-
       requestBody:
         required: true
-        description: Dados completos para atualização do cliente
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ClienteAtualizacao"
-            example:
-              nome: Ana Carolina Souza
-              cpf: "123.456.789-00"
-              telefone: "11999994321"
-              email: ana.carolina@empresa.com
-              status: ATIVO
-
+              $ref: "#/components/schemas/ClienteEntrada"
       responses:
-
         "200":
           description: Cliente atualizado com sucesso
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/RespostaCliente"
-              example:
-                success: true
-                message: Cliente atualizado com sucesso.
-                data:
-                  id: 101
-                  nome: Ana Carolina Souza
-                  cpf: "***.456.789-**"
-                  telefone: "(11) *****-4321"
-                  email: "a***@empresa.com"
-                  status: ATIVO
-                  criadoEm: "2026-07-21T14:30:00Z"
-                  atualizadoEm: "2026-07-21T17:45:00Z"
-
         "400":
           description: Dados enviados em formato inválido
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/RespostaErro"
-              example:
-                success: false
-                message: O CPF informado possui formato inválido.
-
         "401":
           $ref: "#/components/responses/NaoAutenticado"
-
         "403":
           $ref: "#/components/responses/AcessoNegado"
-
         "404":
           $ref: "#/components/responses/ClienteNaoEncontrado"
-
         "500":
           $ref: "#/components/responses/ErroInterno"
 
     delete:
-      tags:
-        - Clientes
+      tags: [Clientes]
       summary: Remover cliente
-      description: |
-        Remove um cliente existente.
-
-        Exige autenticação por token JWT e o escopo `clientes.delete`.
+      description: Remove um cliente existente.
       operationId: removerCliente
-
       security:
         - bearerAuth: []
-
       x-required-scope: clientes.delete
-
       responses:
-
         "200":
           description: Cliente removido com sucesso
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/RespostaSucessoSemDados"
-              example:
-                success: true
-                message: Cliente removido com sucesso.
-                data: null
-
         "401":
           $ref: "#/components/responses/NaoAutenticado"
-
         "403":
           $ref: "#/components/responses/AcessoNegado"
-
         "404":
           $ref: "#/components/responses/ClienteNaoEncontrado"
-
         "500":
           $ref: "#/components/responses/ErroInterno"
 
 components:
-
   securitySchemes:
-
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: |
-        Token JWT enviado no cabeçalho HTTP Authorization.
-
-        Formato:
-
-        Authorization: Bearer {token}
+      description: "Token JWT enviado em Authorization: Bearer {token}."
 
   parameters:
-
     ClienteId:
       name: id
       in: path
@@ -386,233 +190,128 @@ components:
       example: 101
 
   responses:
-
     NaoAutenticado:
-      description: |
-        Token JWT não enviado, inválido ou expirado.
-
-        O código 401 indica que a identidade do usuário não pôde
-        ser confirmada.
+      description: Token JWT ausente, inválido ou expirado
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/RespostaErro"
-          examples:
-            tokenAusente:
-              summary: Token não enviado
-              value:
-                success: false
-                message: Token de autenticação não informado.
-
-            tokenInvalido:
-              summary: Token inválido
-              value:
-                success: false
-                message: Token de autenticação inválido ou expirado.
-
     AcessoNegado:
-      description: |
-        Usuário autenticado, mas sem o escopo necessário para executar
-        a operação.
-
-        O código 403 indica que a identidade foi reconhecida, porém
-        o usuário não possui autorização suficiente.
+      description: Usuário autenticado sem o scope necessário
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/RespostaErro"
-          example:
-            success: false
-            message: Você não possui permissão para executar esta operação.
-
     ClienteNaoEncontrado:
-      description: Cliente não encontrado para o ID informado
+      description: Cliente não encontrado
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/RespostaErro"
-          example:
-            success: false
-            message: Cliente não encontrado.
-
     ErroInterno:
-      description: Falha inesperada no servidor ao processar a requisição
+      description: Falha inesperada ao processar a requisição
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/RespostaErro"
-          example:
-            success: false
-            message: Ocorreu um erro interno ao processar a solicitação.
 
   schemas:
+    StatusCliente:
+      type: string
+      enum: [ATIVO, INATIVO]
 
     ClienteEntrada:
       type: object
       additionalProperties: false
-      required:
-        - nome
-        - cpf
-        - telefone
-        - email
-        - status
+      required: [nome, cpf, telefone, email, status]
       properties:
-
         nome:
           type: string
           minLength: 3
           maxLength: 150
-          description: Nome completo do cliente
           example: Ana Carolina Souza
-
         cpf:
           type: string
-          description: |
-            CPF do cliente.
-
-            O formato deve ser validado pelo servidor. A expressão regular
-            verifica apenas a estrutura do valor e não substitui a validação
-            dos dígitos verificadores.
           pattern: '^\d{3}\.\d{3}\.\d{3}-\d{2}$'
+          description: A expressão valida o formato; os dígitos verificadores devem ser validados pela aplicação.
           example: "123.456.789-00"
-
         telefone:
           type: string
           minLength: 10
           maxLength: 15
-          description: Telefone do cliente com DDD
           example: "11987654321"
-
         email:
           type: string
           format: email
           maxLength: 254
-          description: Endereço de e-mail do cliente
           example: ana.souza@empresa.com
-
         status:
           $ref: "#/components/schemas/StatusCliente"
-
-    ClienteAtualizacao:
-      allOf:
-        - $ref: "#/components/schemas/ClienteEntrada"
 
     Cliente:
       type: object
       additionalProperties: false
-      description: |
-        Representação segura de um cliente.
-
-        CPF, telefone e e-mail devem ser parcialmente mascarados.
-        Senhas, tokens, chaves e outras credenciais nunca devem fazer
-        parte desta resposta.
-      required:
-        - id
-        - nome
-        - cpf
-        - telefone
-        - email
-        - status
-        - criadoEm
+      required: [id, nome, cpf, telefone, email, status, criadoEm]
       properties:
-
         id:
           type: integer
           format: int64
           minimum: 1
-          description: Identificador único do cliente
           example: 101
-
         nome:
           type: string
-          description: Nome completo do cliente
           example: Ana Carolina Souza
-
         cpf:
           type: string
           readOnly: true
           description: CPF parcialmente mascarado
           example: "***.456.789-**"
-
         telefone:
           type: string
           readOnly: true
           description: Telefone parcialmente mascarado
           example: "(11) *****-4321"
-
         email:
           type: string
           readOnly: true
           description: E-mail parcialmente mascarado
           example: "a***@empresa.com"
-
         status:
           $ref: "#/components/schemas/StatusCliente"
-
         criadoEm:
           type: string
           format: date-time
           readOnly: true
-          description: Data e hora de criação do cliente
           example: "2026-07-21T14:30:00Z"
-
         atualizadoEm:
           type: string
           format: date-time
           nullable: true
           readOnly: true
-          description: Data e hora da última atualização
-          example: "2026-07-21T17:45:00Z"
-
-    StatusCliente:
-      type: string
-      description: Situação atual do cliente
-      enum:
-        - ATIVO
-        - INATIVO
-      example: ATIVO
 
     RespostaCliente:
       type: object
       additionalProperties: false
-      required:
-        - success
-        - message
-        - data
+      required: [success, message, data]
       properties:
-
         success:
           type: boolean
-          enum:
-            - true
-          example: true
-
+          enum: [true]
         message:
           type: string
-          example: Cliente consultado com sucesso.
-
         data:
           $ref: "#/components/schemas/Cliente"
 
     RespostaListaClientes:
       type: object
       additionalProperties: false
-      required:
-        - success
-        - message
-        - data
+      required: [success, message, data]
       properties:
-
         success:
           type: boolean
-          enum:
-            - true
-          example: true
-
+          enum: [true]
         message:
           type: string
-          example: Clientes consultados com sucesso.
-
         data:
           type: array
           items:
@@ -621,38 +320,25 @@ components:
     RespostaSucessoSemDados:
       type: object
       additionalProperties: false
-      required:
-        - success
-        - message
-        - data
+      required: [success, message, data]
       properties:
-
         success:
           type: boolean
-          enum:
-            - true
-          example: true
-
+          enum: [true]
         message:
           type: string
-          example: Operação realizada com sucesso.
-
         data:
+          type: object
           nullable: true
           example: null
 
     RespostaErro:
       type: object
       additionalProperties: false
-      required:
-        - success
-        - message
+      required: [success, message]
       properties:
-
         success:
           type: boolean
-          enum:
-            - false
-          example: false
-
-      
+          enum: [false]
+        message:
+          type: string

@@ -1,639 +1,703 @@
-# Ruleset Spectral — API de Gestão de Clientes
-# Compatível com OpenAPI 3.x e projetado para validar o contrato API First.
-#
-# Uso:
-#   npx @stoplight/spectral-cli lint openapi.yaml --ruleset spectral-gestao-clientes.yaml
-#
-# Renomeie este arquivo para .spectral.yaml caso deseje que o Spectral
-# o descubra automaticamente no diretório do projeto.
+Skip to content
+DaniMonteiroDBA
+minha-api
+Repository navigation
+Code
+Issues
+Pull requests
+Agents
+Actions
+Projects
+Wiki
+Security and quality
+Insights
+Settings
+Comparing changes
+Choose two branches to see what’s changed or to start a new pull request. If you need to, you can also  or learn more about diff comparisons.
+ 
+...
+There isn’t anything to compare.
+main and gh-pages are entirely different commit histories.
 
-extends:
-  - spectral:oas
+ Showing  with 660 additions and 0 deletions.
+  Empty file added 0  
+.nojekyll
+ 
+Empty file.
+  660 changes: 660 additions & 0 deletions 660  
+index.html
+ 
+Original file line number	Diff line number	Diff line change
+@@ -0,0 +1,660 @@
+<!DOCTYPE html>
+<html>
 
-formats:
-  - oas3
+<head>
+  <meta charset="utf8" />
+  <title>API de Gestão de Clientes</title>
+  <!-- needed for adaptive design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+  <script src="https://cdn.redocly.com/redoc/v2.5.3/bundles/redoc.standalone.js" integrity="sha384-xiEssMQFSpSfLbzRZCGfxxIM5QDb2DTrU6vyoZdp2sV1L6pmOMy6MpTtUoLbpC96" crossorigin="anonymous"></script><style data-styled="true" data-styled-version="6.4.2">.kktglN{width:calc(100% - 40%);padding:0 40px;}/*!sc*/
+@media print,screen and (max-width: 75rem){.kktglN{width:100%;padding:40px 40px;}}/*!sc*/
+.kmAAAV{width:calc(100% - 40%);padding:0 40px;}/*!sc*/
+@media print,screen and (max-width: 75rem){.kmAAAV{width:100%;padding:0px 40px;}}/*!sc*/
+data-styled.g5[id="sc-hKVpXn"]{content:"kktglN,kmAAAV,"}/*!sc*/
+.jleRXN{padding:40px 0;}/*!sc*/
+.jleRXN:last-child{min-height:calc(100vh + 1px);}/*!sc*/
+.jleRXN>.jleRXN:last-child{min-height:initial;}/*!sc*/
+@media print,screen and (max-width: 75rem){.jleRXN{padding:0;}}/*!sc*/
+.grDwca{padding:40px 0;position:relative;}/*!sc*/
+.grDwca:last-child{min-height:calc(100vh + 1px);}/*!sc*/
+.grDwca>.grDwca:last-child{min-height:initial;}/*!sc*/
+@media print,screen and (max-width: 75rem){.grDwca{padding:0;}}/*!sc*/
+.grDwca:not(:last-of-type):after{position:absolute;bottom:0;width:100%;display:block;content:'';border-bottom:1px solid rgba(0, 0, 0, 0.2);}/*!sc*/
+data-styled.g6[id="sc-eCQgVK"]{content:"jleRXN,grDwca,"}/*!sc*/
+.fpMlmc{width:40%;color:#ffffff;background-color:#263238;padding:0 40px;}/*!sc*/
+@media print,screen and (max-width: 75rem){.fpMlmc{width:100%;padding:40px 40px;}}/*!sc*/
+data-styled.g7[id="sc-jSppWd"]{content:"fpMlmc,"}/*!sc*/
+.bdQQyo{background-color:#263238;}/*!sc*/
+data-styled.g8[id="sc-gKkgUA"]{content:"bdQQyo,"}/*!sc*/
+.lhRBUS{display:flex;width:100%;padding:0;}/*!sc*/
+@media print,screen and (max-width: 75rem){.lhRBUS{flex-direction:column;}}/*!sc*/
+data-styled.g9[id="sc-iCECmn"]{content:"lhRBUS,"}/*!sc*/
+.eRMVDe{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.85714em;line-height:1.6em;color:#333333;}/*!sc*/
+data-styled.g10[id="sc-fuztkK"]{content:"eRMVDe,"}/*!sc*/
+.MOVBZ{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.57143em;line-height:1.6em;color:#333333;margin:0 0 20px;}/*!sc*/
+data-styled.g11[id="sc-qdQOe"]{content:"MOVBZ,"}/*!sc*/
+.iSbGeC{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.27em;line-height:1.6em;color:#333333;}/*!sc*/
+data-styled.g12[id="sc-jrIDTr"]{content:"iSbGeC,"}/*!sc*/
+.iamDfj{color:#ffffff;}/*!sc*/
+data-styled.g13[id="sc-kEbgWM"]{content:"iamDfj,"}/*!sc*/
+.kcvrhp{border-bottom:1px solid rgba(38, 50, 56, 0.3);margin:1em 0 1em 0;color:rgba(38, 50, 56, 0.5);font-weight:normal;text-transform:uppercase;font-size:0.929em;line-height:20px;}/*!sc*/
+data-styled.g14[id="sc-iqkkDd"]{content:"kcvrhp,"}/*!sc*/
+.jmoZom{cursor:pointer;margin-left:-20px;padding:0;line-height:1;width:20px;display:inline-block;outline:0;}/*!sc*/
+.jmoZom:before{content:'';width:15px;height:15px;background-size:contain;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMCIgeT0iMCIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cGF0aCBmaWxsPSIjMDEwMTAxIiBkPSJNNDU5LjcgMjMzLjRsLTkwLjUgOTAuNWMtNTAgNTAtMTMxIDUwLTE4MSAwIC03LjktNy44LTE0LTE2LjctMTkuNC0yNS44bDQyLjEtNDIuMWMyLTIgNC41LTMuMiA2LjgtNC41IDIuOSA5LjkgOCAxOS4zIDE1LjggMjcuMiAyNSAyNSA2NS42IDI0LjkgOTAuNSAwbDkwLjUtOTAuNWMyNS0yNSAyNS02NS42IDAtOTAuNSAtMjQuOS0yNS02NS41LTI1LTkwLjUgMGwtMzIuMiAzMi4yYy0yNi4xLTEwLjItNTQuMi0xMi45LTgxLjYtOC45bDY4LjYtNjguNmM1MC01MCAxMzEtNTAgMTgxIDBDNTA5LjYgMTAyLjMgNTA5LjYgMTgzLjQgNDU5LjcgMjMzLjR6TTIyMC4zIDM4Mi4ybC0zMi4yIDMyLjJjLTI1IDI0LjktNjUuNiAyNC45LTkwLjUgMCAtMjUtMjUtMjUtNjUuNiAwLTkwLjVsOTAuNS05MC41YzI1LTI1IDY1LjUtMjUgOTAuNSAwIDcuOCA3LjggMTIuOSAxNy4yIDE1LjggMjcuMSAyLjQtMS40IDQuOC0yLjUgNi44LTQuNWw0Mi4xLTQyYy01LjQtOS4yLTExLjYtMTgtMTkuNC0yNS44IC01MC01MC0xMzEtNTAtMTgxIDBsLTkwLjUgOTAuNWMtNTAgNTAtNTAgMTMxIDAgMTgxIDUwIDUwIDEzMSA1MCAxODEgMGw2OC42LTY4LjZDMjc0LjYgMzk1LjEgMjQ2LjQgMzkyLjMgMjIwLjMgMzgyLjJ6Ii8+PC9zdmc+Cg==');opacity:0.5;visibility:hidden;display:inline-block;vertical-align:middle;}/*!sc*/
+h1:hover>.jmoZom::before,h2:hover>.jmoZom::before,.jmoZom:hover::before{visibility:visible;}/*!sc*/
+data-styled.g15[id="sc-crPgjm"]{content:"jmoZom,"}/*!sc*/
+.kdgFPv{height:18px;width:18px;min-width:18px;vertical-align:middle;float:right;transition:transform 0.2s ease-out;transform:rotateZ(-90deg);}/*!sc*/
+.bEEWJa{height:1.3em;width:1.3em;min-width:1.3em;vertical-align:middle;transition:transform 0.2s ease-out;transform:rotateZ(-90deg);}/*!sc*/
+.gngmNp{height:1.5em;width:1.5em;min-width:1.5em;vertical-align:middle;float:left;transition:transform 0.2s ease-out;transform:rotateZ(-90deg);}/*!sc*/
+.gngmNp polygon{fill:#1d8127;}/*!sc*/
+.hJoFRR{height:1.5em;width:1.5em;min-width:1.5em;vertical-align:middle;float:left;transition:transform 0.2s ease-out;transform:rotateZ(-90deg);}/*!sc*/
+.hJoFRR polygon{fill:#d41f1c;}/*!sc*/
+.bQKUih{height:20px;width:20px;min-width:20px;vertical-align:middle;float:right;transition:transform 0.2s ease-out;transform:rotateZ(0);}/*!sc*/
+.bQKUih polygon{fill:white;}/*!sc*/
+data-styled.g16[id="sc-dYjPD"]{content:"kdgFPv,bEEWJa,gngmNp,hJoFRR,bQKUih,"}/*!sc*/
+.jFNAwF{border-left:1px solid #7c7cbb;box-sizing:border-box;position:relative;padding:10px 10px 10px 0;}/*!sc*/
+@media screen and (max-width: 50rem){.jFNAwF{display:block;overflow:hidden;}}/*!sc*/
+tr:first-of-type>.jFNAwF,tr.last>.jFNAwF{border-left-width:0;background-position:top left;background-repeat:no-repeat;background-size:1px 100%;}/*!sc*/
+tr:first-of-type>.jFNAwF{background-image:linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 22px,
+      #7c7cbb 22px,
+      #7c7cbb 100%
+    );}/*!sc*/
+tr.last>.jFNAwF{background-image:linear-gradient(
+      to bottom,
+      #7c7cbb 0%,
+      #7c7cbb 22px,
+      transparent 22px,
+      transparent 100%
+    );}/*!sc*/
+tr.last+tr>.jFNAwF{border-left-color:transparent;}/*!sc*/
+tr.last:first-child>.jFNAwF{background:none;border-left-color:transparent;}/*!sc*/
+data-styled.g19[id="sc-hCcPtG"]{content:"jFNAwF,"}/*!sc*/
+.lcdEEX{vertical-align:top;line-height:20px;white-space:nowrap;font-size:13px;font-family:Courier,monospace;}/*!sc*/
+.lcdEEX.deprecated{text-decoration:line-through;color:#707070;}/*!sc*/
+data-styled.g21[id="sc-fFCZOx"]{content:"lcdEEX,"}/*!sc*/
+.gLpZiQ{border-bottom:1px solid #9fb4be;padding:10px 0;width:75%;box-sizing:border-box;}/*!sc*/
+tr.expanded .gLpZiQ{border-bottom:none;}/*!sc*/
+@media screen and (max-width: 50rem){.gLpZiQ{padding:0 20px;border-bottom:none;border-left:1px solid #7c7cbb;}tr.last>.gLpZiQ{border-left:none;}}/*!sc*/
+data-styled.g22[id="sc-bjLslk"]{content:"gLpZiQ,"}/*!sc*/
+.kkMuqc{color:#7c7cbb;font-family:Courier,monospace;margin-right:10px;}/*!sc*/
+.kkMuqc::before{content:'';display:inline-block;vertical-align:middle;width:10px;height:1px;background:#7c7cbb;}/*!sc*/
+.kkMuqc::after{content:'';display:inline-block;vertical-align:middle;width:1px;background:#7c7cbb;height:7px;}/*!sc*/
+data-styled.g23[id="sc-ieCSdj"]{content:"kkMuqc,"}/*!sc*/
+.bsjUmE{border-collapse:separate;border-radius:3px;font-size:14px;border-spacing:0;width:100%;}/*!sc*/
+.bsjUmE >tr{vertical-align:middle;}/*!sc*/
+@media screen and (max-width: 50rem){.bsjUmE{display:block;}.bsjUmE >tr,.bsjUmE >tbody>tr{display:block;}}/*!sc*/
+@media screen and (max-width: 50rem) and (-ms-high-contrast:none){.bsjUmE td{float:left;width:100%;}}/*!sc*/
+.bsjUmE .sc-dILkzW,.bsjUmE .sc-dILkzW .sc-dILkzW .sc-dILkzW,.bsjUmE .sc-dILkzW .sc-dILkzW .sc-dILkzW .sc-dILkzW .sc-dILkzW{margin:1em;margin-right:0;background:#fafafa;}/*!sc*/
+.bsjUmE .sc-dILkzW .sc-dILkzW,.bsjUmE .sc-dILkzW .sc-dILkzW .sc-dILkzW .sc-dILkzW,.bsjUmE .sc-dILkzW .sc-dILkzW .sc-dILkzW .sc-dILkzW .sc-dILkzW .sc-dILkzW{background:#ffffff;}/*!sc*/
+data-styled.g25[id="sc-hHopjF"]{content:"bsjUmE,"}/*!sc*/
+.kibfTX >ul{list-style:none;padding:0;margin:0;margin:0 -5px;}/*!sc*/
+.kibfTX >ul >li{padding:5px 10px;display:inline-block;background-color:#11171a;border-bottom:1px solid rgba(0, 0, 0, 0.5);cursor:pointer;text-align:center;outline:none;color:#ccc;margin:0 5px 5px 5px;border:1px solid #07090b;border-radius:5px;min-width:60px;font-size:0.9em;font-weight:bold;}/*!sc*/
+.kibfTX >ul >li.react-tabs__tab--selected{color:#333333;background:#ffffff;}/*!sc*/
+.kibfTX >ul >li.react-tabs__tab--selected:focus{outline:auto;}/*!sc*/
+.kibfTX >ul >li:only-child{flex:none;min-width:100px;}/*!sc*/
+.kibfTX >ul >li.tab-success{color:#1d8127;}/*!sc*/
+.kibfTX >ul >li.tab-redirect{color:#ffa500;}/*!sc*/
+.kibfTX >ul >li.tab-info{color:#87ceeb;}/*!sc*/
+.kibfTX >ul >li.tab-error{color:#d41f1c;}/*!sc*/
+.kibfTX >.react-tabs__tab-panel{background:#11171a;}/*!sc*/
+.kibfTX >.react-tabs__tab-panel>div,.kibfTX >.react-tabs__tab-panel>pre{padding:20px;margin:0;}/*!sc*/
+.kibfTX >.react-tabs__tab-panel>div>pre{padding:0;}/*!sc*/
+data-styled.g31[id="sc-cxxQMU"]{content:"kibfTX,"}/*!sc*/
+.fiNpIH code[class*='language-'],.fiNpIH pre[class*='language-']{text-shadow:0 -0.1em 0.2em black;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;}/*!sc*/
+@media print{.fiNpIH code[class*='language-'],.fiNpIH pre[class*='language-']{text-shadow:none;}}/*!sc*/
+.fiNpIH pre[class*='language-']{padding:1em;margin:0.5em 0;overflow:auto;}/*!sc*/
+.fiNpIH .token.comment,.fiNpIH .token.prolog,.fiNpIH .token.doctype,.fiNpIH .token.cdata{color:hsl(30, 20%, 50%);}/*!sc*/
+.fiNpIH .token.punctuation{opacity:0.7;}/*!sc*/
+.fiNpIH .namespace{opacity:0.7;}/*!sc*/
+.fiNpIH .token.property,.fiNpIH .token.tag,.fiNpIH .token.number,.fiNpIH .token.constant,.fiNpIH .token.symbol{color:#4a8bb3;}/*!sc*/
+.fiNpIH .token.boolean{color:#e64441;}/*!sc*/
+.fiNpIH .token.selector,.fiNpIH .token.attr-name,.fiNpIH .token.string,.fiNpIH .token.char,.fiNpIH .token.builtin,.fiNpIH .token.inserted{color:#a0fbaa;}/*!sc*/
+.fiNpIH .token.selector+a,.fiNpIH .token.attr-name+a,.fiNpIH .token.string+a,.fiNpIH .token.char+a,.fiNpIH .token.builtin+a,.fiNpIH .token.inserted+a,.fiNpIH .token.selector+a:visited,.fiNpIH .token.attr-name+a:visited,.fiNpIH .token.string+a:visited,.fiNpIH .token.char+a:visited,.fiNpIH .token.builtin+a:visited,.fiNpIH .token.inserted+a:visited{color:#4ed2ba;text-decoration:underline;}/*!sc*/
+.fiNpIH .token.property.string{color:white;}/*!sc*/
+.fiNpIH .token.operator,.fiNpIH .token.entity,.fiNpIH .token.url,.fiNpIH .token.variable{color:hsl(40, 90%, 60%);}/*!sc*/
+.fiNpIH .token.atrule,.fiNpIH .token.attr-value,.fiNpIH .token.keyword{color:hsl(350, 40%, 70%);}/*!sc*/
+.fiNpIH .token.regex,.fiNpIH .token.important{color:#e90;}/*!sc*/
+.fiNpIH .token.important,.fiNpIH .token.bold{font-weight:bold;}/*!sc*/
+.fiNpIH .token.italic{font-style:italic;}/*!sc*/
+.fiNpIH .token.entity{cursor:help;}/*!sc*/
+.fiNpIH .token.deleted{color:red;}/*!sc*/
+data-styled.g33[id="sc-iJSMbW"]{content:"fiNpIH,"}/*!sc*/
+.dzKJV{opacity:0.7;transition:opacity 0.3s ease;text-align:right;}/*!sc*/
+.dzKJV:focus-within{opacity:1;}/*!sc*/
+.dzKJV >button{background-color:transparent;border:0;color:inherit;padding:2px 10px;font-family:Roboto,sans-serif;font-size:14px;line-height:1.5em;cursor:pointer;outline:0;}/*!sc*/
+.dzKJV >button :hover,.dzKJV >button :focus{background:rgba(255, 255, 255, 0.1);}/*!sc*/
+data-styled.g34[id="sc-giQkEn"]{content:"dzKJV,"}/*!sc*/
+.iOXjCz{position:relative;}/*!sc*/
+data-styled.g38[id="sc-kLEbxe"]{content:"iOXjCz,"}/*!sc*/
+.kxMqOs{margin-left:10px;text-transform:none;font-size:0.929em;color:black;}/*!sc*/
+data-styled.g42[id="sc-gXvOjn"]{content:"kxMqOs,"}/*!sc*/
+.ewCFMV{font-family:Roboto,sans-serif;font-weight:400;line-height:1.5em;}/*!sc*/
+.ewCFMV p:last-child{margin-bottom:0;}/*!sc*/
+.ewCFMV h1{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.85714em;line-height:1.6em;color:#32329f;margin-top:0;}/*!sc*/
+.ewCFMV h2{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.57143em;line-height:1.6em;color:#333333;}/*!sc*/
+.ewCFMV code{color:#e53935;background-color:rgba(38, 50, 56, 0.05);font-family:Courier,monospace;border-radius:2px;border:1px solid rgba(38, 50, 56, 0.1);padding:0 5px;font-size:13px;font-weight:400;word-break:break-word;}/*!sc*/
+.ewCFMV pre{font-family:Courier,monospace;white-space:pre;background-color:#11171a;color:white;padding:20px;overflow-x:auto;line-height:normal;border-radius:0;border:1px solid rgba(38, 50, 56, 0.1);}/*!sc*/
+.ewCFMV pre code{background-color:transparent;color:white;padding:0;}/*!sc*/
+.ewCFMV pre code:before,.ewCFMV pre code:after{content:none;}/*!sc*/
+.ewCFMV blockquote{margin:0;margin-bottom:1em;padding:0 15px;color:#777;border-left:4px solid #ddd;}/*!sc*/
+.ewCFMV img{max-width:100%;box-sizing:content-box;}/*!sc*/
+.ewCFMV ul,.ewCFMV ol{padding-left:2em;margin:0;margin-bottom:1em;}/*!sc*/
+.ewCFMV ul ul,.ewCFMV ol ul,.ewCFMV ul ol,.ewCFMV ol ol{margin-bottom:0;margin-top:0;}/*!sc*/
+.ewCFMV table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all;border-collapse:collapse;border-spacing:0;margin-top:1.5em;margin-bottom:1.5em;}/*!sc*/
+.ewCFMV table tr{background-color:#fff;border-top:1px solid #ccc;}/*!sc*/
+.ewCFMV table tr:nth-child(2n){background-color:#fafafa;}/*!sc*/
+.ewCFMV table th,.ewCFMV table td{padding:6px 13px;border:1px solid #ddd;}/*!sc*/
+.ewCFMV table th{text-align:left;font-weight:bold;}/*!sc*/
+.ewCFMV .share-link{cursor:pointer;margin-left:-20px;padding:0;line-height:1;width:20px;display:inline-block;outline:0;}/*!sc*/
+.ewCFMV .share-link:before{content:'';width:15px;height:15px;background-size:contain;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMCIgeT0iMCIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cGF0aCBmaWxsPSIjMDEwMTAxIiBkPSJNNDU5LjcgMjMzLjRsLTkwLjUgOTAuNWMtNTAgNTAtMTMxIDUwLTE4MSAwIC03LjktNy44LTE0LTE2LjctMTkuNC0yNS44bDQyLjEtNDIuMWMyLTIgNC41LTMuMiA2LjgtNC41IDIuOSA5LjkgOCAxOS4zIDE1LjggMjcuMiAyNSAyNSA2NS42IDI0LjkgOTAuNSAwbDkwLjUtOTAuNWMyNS0yNSAyNS02NS42IDAtOTAuNSAtMjQuOS0yNS02NS41LTI1LTkwLjUgMGwtMzIuMiAzMi4yYy0yNi4xLTEwLjItNTQuMi0xMi45LTgxLjYtOC45bDY4LjYtNjguNmM1MC01MCAxMzEtNTAgMTgxIDBDNTA5LjYgMTAyLjMgNTA5LjYgMTgzLjQgNDU5LjcgMjMzLjR6TTIyMC4zIDM4Mi4ybC0zMi4yIDMyLjJjLTI1IDI0LjktNjUuNiAyNC45LTkwLjUgMCAtMjUtMjUtMjUtNjUuNiAwLTkwLjVsOTAuNS05MC41YzI1LTI1IDY1LjUtMjUgOTAuNSAwIDcuOCA3LjggMTIuOSAxNy4yIDE1LjggMjcuMSAyLjQtMS40IDQuOC0yLjUgNi44LTQuNWw0Mi4xLTQyYy01LjQtOS4yLTExLjYtMTgtMTkuNC0yNS44IC01MC01MC0xMzEtNTAtMTgxIDBsLTkwLjUgOTAuNWMtNTAgNTAtNTAgMTMxIDAgMTgxIDUwIDUwIDEzMSA1MCAxODEgMGw2OC42LTY4LjZDMjc0LjYgMzk1LjEgMjQ2LjQgMzkyLjMgMjIwLjMgMzgyLjJ6Ii8+PC9zdmc+Cg==');opacity:0.5;visibility:hidden;display:inline-block;vertical-align:middle;}/*!sc*/
+.ewCFMV h1:hover>.share-link::before,.ewCFMV h2:hover>.share-link::before,.ewCFMV .share-link:hover::before{visibility:visible;}/*!sc*/
+.ewCFMV a{text-decoration:auto;color:#32329f;}/*!sc*/
+.ewCFMV a:visited{color:#32329f;}/*!sc*/
+.ewCFMV a:hover{color:#6868cf;text-decoration:auto;}/*!sc*/
+.dNfUH{font-family:Roboto,sans-serif;font-weight:400;line-height:1.5em;}/*!sc*/
+.dNfUH p:last-child{margin-bottom:0;}/*!sc*/
+.dNfUH p:first-child{margin-top:0;}/*!sc*/
+.dNfUH p:last-child{margin-bottom:0;}/*!sc*/
+.dNfUH p{display:inline-block;}/*!sc*/
+.dNfUH h1{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.85714em;line-height:1.6em;color:#32329f;margin-top:0;}/*!sc*/
+.dNfUH h2{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.57143em;line-height:1.6em;color:#333333;}/*!sc*/
+.dNfUH code{color:#e53935;background-color:rgba(38, 50, 56, 0.05);font-family:Courier,monospace;border-radius:2px;border:1px solid rgba(38, 50, 56, 0.1);padding:0 5px;font-size:13px;font-weight:400;word-break:break-word;}/*!sc*/
+.dNfUH pre{font-family:Courier,monospace;white-space:pre;background-color:#11171a;color:white;padding:20px;overflow-x:auto;line-height:normal;border-radius:0;border:1px solid rgba(38, 50, 56, 0.1);}/*!sc*/
+.dNfUH pre code{background-color:transparent;color:white;padding:0;}/*!sc*/
+.dNfUH pre code:before,.dNfUH pre code:after{content:none;}/*!sc*/
+.dNfUH blockquote{margin:0;margin-bottom:1em;padding:0 15px;color:#777;border-left:4px solid #ddd;}/*!sc*/
+.dNfUH img{max-width:100%;box-sizing:content-box;}/*!sc*/
+.dNfUH ul,.dNfUH ol{padding-left:2em;margin:0;margin-bottom:1em;}/*!sc*/
+.dNfUH ul ul,.dNfUH ol ul,.dNfUH ul ol,.dNfUH ol ol{margin-bottom:0;margin-top:0;}/*!sc*/
+.dNfUH table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all;border-collapse:collapse;border-spacing:0;margin-top:1.5em;margin-bottom:1.5em;}/*!sc*/
+.dNfUH table tr{background-color:#fff;border-top:1px solid #ccc;}/*!sc*/
+.dNfUH table tr:nth-child(2n){background-color:#fafafa;}/*!sc*/
+.dNfUH table th,.dNfUH table td{padding:6px 13px;border:1px solid #ddd;}/*!sc*/
+.dNfUH table th{text-align:left;font-weight:bold;}/*!sc*/
+.dNfUH .share-link{cursor:pointer;margin-left:-20px;padding:0;line-height:1;width:20px;display:inline-block;outline:0;}/*!sc*/
+.dNfUH .share-link:before{content:'';width:15px;height:15px;background-size:contain;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMCIgeT0iMCIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cGF0aCBmaWxsPSIjMDEwMTAxIiBkPSJNNDU5LjcgMjMzLjRsLTkwLjUgOTAuNWMtNTAgNTAtMTMxIDUwLTE4MSAwIC03LjktNy44LTE0LTE2LjctMTkuNC0yNS44bDQyLjEtNDIuMWMyLTIgNC41LTMuMiA2LjgtNC41IDIuOSA5LjkgOCAxOS4zIDE1LjggMjcuMiAyNSAyNSA2NS42IDI0LjkgOTAuNSAwbDkwLjUtOTAuNWMyNS0yNSAyNS02NS42IDAtOTAuNSAtMjQuOS0yNS02NS41LTI1LTkwLjUgMGwtMzIuMiAzMi4yYy0yNi4xLTEwLjItNTQuMi0xMi45LTgxLjYtOC45bDY4LjYtNjguNmM1MC01MCAxMzEtNTAgMTgxIDBDNTA5LjYgMTAyLjMgNTA5LjYgMTgzLjQgNDU5LjcgMjMzLjR6TTIyMC4zIDM4Mi4ybC0zMi4yIDMyLjJjLTI1IDI0LjktNjUuNiAyNC45LTkwLjUgMCAtMjUtMjUtMjUtNjUuNiAwLTkwLjVsOTAuNS05MC41YzI1LTI1IDY1LjUtMjUgOTAuNSAwIDcuOCA3LjggMTIuOSAxNy4yIDE1LjggMjcuMSAyLjQtMS40IDQuOC0yLjUgNi44LTQuNWw0Mi4xLTQyYy01LjQtOS4yLTExLjYtMTgtMTkuNC0yNS44IC01MC01MC0xMzEtNTAtMTgxIDBsLTkwLjUgOTAuNWMtNTAgNTAtNTAgMTMxIDAgMTgxIDUwIDUwIDEzMSA1MCAxODEgMGw2OC42LTY4LjZDMjc0LjYgMzk1LjEgMjQ2LjQgMzkyLjMgMjIwLjMgMzgyLjJ6Ii8+PC9zdmc+Cg==');opacity:0.5;visibility:hidden;display:inline-block;vertical-align:middle;}/*!sc*/
+.dNfUH h1:hover>.share-link::before,.dNfUH h2:hover>.share-link::before,.dNfUH .share-link:hover::before{visibility:visible;}/*!sc*/
+.dNfUH a{text-decoration:auto;color:#32329f;}/*!sc*/
+.dNfUH a:visited{color:#32329f;}/*!sc*/
+.dNfUH a:hover{color:#6868cf;text-decoration:auto;}/*!sc*/
+.bAoMjv{font-family:Roboto,sans-serif;font-weight:400;line-height:1.5em;}/*!sc*/
+.bAoMjv p:last-child{margin-bottom:0;}/*!sc*/
+.bAoMjv p:first-child{margin-top:0;}/*!sc*/
+.bAoMjv p:last-child{margin-bottom:0;}/*!sc*/
+.bAoMjv h1{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.85714em;line-height:1.6em;color:#32329f;margin-top:0;}/*!sc*/
+.bAoMjv h2{font-family:Montserrat,sans-serif;font-weight:400;font-size:1.57143em;line-height:1.6em;color:#333333;}/*!sc*/
+.bAoMjv code{color:#e53935;background-color:rgba(38, 50, 56, 0.05);font-family:Courier,monospace;border-radius:2px;border:1px solid rgba(38, 50, 56, 0.1);padding:0 5px;font-size:13px;font-weight:400;word-break:break-word;}/*!sc*/
+.bAoMjv pre{font-family:Courier,monospace;white-space:pre;background-color:#11171a;color:white;padding:20px;overflow-x:auto;line-height:normal;border-radius:0;border:1px solid rgba(38, 50, 56, 0.1);}/*!sc*/
+.bAoMjv pre code{background-color:transparent;color:white;padding:0;}/*!sc*/
+.bAoMjv pre code:before,.bAoMjv pre code:after{content:none;}/*!sc*/
+.bAoMjv blockquote{margin:0;margin-bottom:1em;padding:0 15px;color:#777;border-left:4px solid #ddd;}/*!sc*/
+.bAoMjv img{max-width:100%;box-sizing:content-box;}/*!sc*/
+.bAoMjv ul,.bAoMjv ol{padding-left:2em;margin:0;margin-bottom:1em;}/*!sc*/
+.bAoMjv ul ul,.bAoMjv ol ul,.bAoMjv ul ol,.bAoMjv ol ol{margin-bottom:0;margin-top:0;}/*!sc*/
+.bAoMjv table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all;border-collapse:collapse;border-spacing:0;margin-top:1.5em;margin-bottom:1.5em;}/*!sc*/
+.bAoMjv table tr{background-color:#fff;border-top:1px solid #ccc;}/*!sc*/
+.bAoMjv table tr:nth-child(2n){background-color:#fafafa;}/*!sc*/
+.bAoMjv table th,.bAoMjv table td{padding:6px 13px;border:1px solid #ddd;}/*!sc*/
+.bAoMjv table th{text-align:left;font-weight:bold;}/*!sc*/
+.bAoMjv .share-link{cursor:pointer;margin-left:-20px;padding:0;line-height:1;width:20px;display:inline-block;outline:0;}/*!sc*/
+.bAoMjv .share-link:before{content:'';width:15px;height:15px;background-size:contain;background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMCIgeT0iMCIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cGF0aCBmaWxsPSIjMDEwMTAxIiBkPSJNNDU5LjcgMjMzLjRsLTkwLjUgOTAuNWMtNTAgNTAtMTMxIDUwLTE4MSAwIC03LjktNy44LTE0LTE2LjctMTkuNC0yNS44bDQyLjEtNDIuMWMyLTIgNC41LTMuMiA2LjgtNC41IDIuOSA5LjkgOCAxOS4zIDE1LjggMjcuMiAyNSAyNSA2NS42IDI0LjkgOTAuNSAwbDkwLjUtOTAuNWMyNS0yNSAyNS02NS42IDAtOTAuNSAtMjQuOS0yNS02NS41LTI1LTkwLjUgMGwtMzIuMiAzMi4yYy0yNi4xLTEwLjItNTQuMi0xMi45LTgxLjYtOC45bDY4LjYtNjguNmM1MC01MCAxMzEtNTAgMTgxIDBDNTA5LjYgMTAyLjMgNTA5LjYgMTgzLjQgNDU5LjcgMjMzLjR6TTIyMC4zIDM4Mi4ybC0zMi4yIDMyLjJjLTI1IDI0LjktNjUuNiAyNC45LTkwLjUgMCAtMjUtMjUtMjUtNjUuNiAwLTkwLjVsOTAuNS05MC41YzI1LTI1IDY1LjUtMjUgOTAuNSAwIDcuOCA3LjggMTIuOSAxNy4yIDE1LjggMjcuMSAyLjQtMS40IDQuOC0yLjUgNi44LTQuNWw0Mi4xLTQyYy01LjQtOS4yLTExLjYtMTgtMTkuNC0yNS44IC01MC01MC0xMzEtNTAtMTgxIDBsLTkwLjUgOTAuNWMtNTAgNTAtNTAgMTMxIDAgMTgxIDUwIDUwIDEzMSA1MCAxODEgMGw2OC42LTY4LjZDMjc0LjYgMzk1LjEgMjQ2LjQgMzkyLjMgMjIwLjMgMzgyLjJ6Ii8+PC9zdmc+Cg==');opacity:0.5;visibility:hidden;display:inline-block;vertical-align:middle;}/*!sc*/
+.bAoMjv h1:hover>.share-link::before,.bAoMjv h2:hover>.share-link::before,.bAoMjv .share-link:hover::before{visibility:visible;}/*!sc*/
+.bAoMjv a{text-decoration:auto;color:#32329f;}/*!sc*/
+.bAoMjv a:visited{color:#32329f;}/*!sc*/
+.bAoMjv a:hover{color:#6868cf;text-decoration:auto;}/*!sc*/
+data-styled.g43[id="sc-cBEgGa"]{content:"ewCFMV,dNfUH,bAoMjv,"}/*!sc*/
+.dDDioG{display:inline;}/*!sc*/
+data-styled.g44[id="sc-ciCrSJ"]{content:"dDDioG,"}/*!sc*/
+.feYhXE{position:relative;}/*!sc*/
+data-styled.g45[id="sc-jcgtOs"]{content:"feYhXE,"}/*!sc*/
+.hHzuQA:hover>.sc-giQkEn{opacity:1;}/*!sc*/
+data-styled.g50[id="sc-cTZdpT"]{content:"hHzuQA,"}/*!sc*/
+.jgTAJz{font-family:Courier,monospace;font-size:13px;white-space:pre;contain:content;overflow-x:auto;}/*!sc*/
+.jgTAJz .redoc-json code>.collapser{display:none;pointer-events:none;}/*!sc*/
+.jgTAJz .callback-function{color:gray;}/*!sc*/
+.jgTAJz .collapser:after{content:'-';cursor:pointer;}/*!sc*/
+.jgTAJz .collapsed>.collapser:after{content:'+';cursor:pointer;}/*!sc*/
+.jgTAJz .ellipsis:after{content:' … ';}/*!sc*/
+.jgTAJz .collapsible{margin-left:2em;}/*!sc*/
+.jgTAJz .hoverable{padding-top:1px;padding-bottom:1px;padding-left:2px;padding-right:2px;border-radius:2px;}/*!sc*/
+.jgTAJz .hovered{background-color:rgba(235, 238, 249, 1);}/*!sc*/
+.jgTAJz .collapser{background-color:transparent;border:0;color:#fff;font-family:Courier,monospace;font-size:13px;padding-right:6px;padding-left:6px;padding-top:0;padding-bottom:0;display:flex;align-items:center;justify-content:center;width:15px;height:15px;position:absolute;top:4px;left:-1.5em;cursor:default;user-select:none;-webkit-user-select:none;padding:2px;}/*!sc*/
+.jgTAJz .collapser:focus{outline-color:#fff;outline-style:dotted;outline-width:1px;}/*!sc*/
+.jgTAJz ul{list-style-type:none;padding:0px;margin:0px 0px 0px 26px;}/*!sc*/
+.jgTAJz li{position:relative;display:block;}/*!sc*/
+.jgTAJz .hoverable{display:inline-block;}/*!sc*/
+.jgTAJz .selected{outline-style:solid;outline-width:1px;outline-style:dotted;}/*!sc*/
+.jgTAJz .collapsed>.collapsible{display:none;}/*!sc*/
+.jgTAJz .ellipsis{display:none;}/*!sc*/
+.jgTAJz .collapsed>.ellipsis{display:inherit;}/*!sc*/
+data-styled.g51[id="sc-jNDflC"]{content:"jgTAJz,"}/*!sc*/
+.kgKexQ{padding:0.9em;background-color:rgba(38,50,56,0.4);margin:0 0 10px 0;display:block;font-family:Montserrat,sans-serif;font-size:0.929em;line-height:1.5em;}/*!sc*/
+data-styled.g52[id="sc-dPqFhK"]{content:"kgKexQ,"}/*!sc*/
+.BuCyN{font-family:Montserrat,sans-serif;font-size:12px;position:absolute;z-index:1;top:-11px;left:12px;font-weight:600;color:rgba(255,255,255,0.7);}/*!sc*/
+data-styled.g53[id="sc-bBzIOb"]{content:"BuCyN,"}/*!sc*/
+.bMFMGt{position:relative;}/*!sc*/
+data-styled.g54[id="sc-cNSlRw"]{content:"bMFMGt,"}/*!sc*/
+.jUCYlq{margin-top:15px;}/*!sc*/
+data-styled.g57[id="sc-hUheUT"]{content:"jUCYlq,"}/*!sc*/
+.jMRTsl{vertical-align:middle;font-size:13px;line-height:20px;}/*!sc*/
+data-styled.g59[id="sc-gSILEF"]{content:"jMRTsl,"}/*!sc*/
+.NncTE{color:rgba(102,102,102,0.9);}/*!sc*/
+data-styled.g60[id="sc-lbpDNm"]{content:"NncTE,"}/*!sc*/
+.kUjPnZ{color:#666;}/*!sc*/
+data-styled.g61[id="sc-iNyHtD"]{content:"kUjPnZ,"}/*!sc*/
+.ehlihR{color:#666;word-break:break-word;}/*!sc*/
+data-styled.g62[id="sc-jePOid"]{content:"ehlihR,"}/*!sc*/
+.dHYagA{color:#d41f1c;font-size:0.9em;font-weight:normal;margin-left:20px;line-height:1;}/*!sc*/
+data-styled.g63[id="sc-eIYgEQ"]{content:"dHYagA,"}/*!sc*/
+.grmBkm{color:#0e7c86;font-family:Courier,monospace;font-size:12px;}/*!sc*/
+.grmBkm::before,.grmBkm::after{content:' ';}/*!sc*/
+data-styled.g66[id="sc-eibAPZ"]{content:"grmBkm,"}/*!sc*/
+.OXDYs{border-radius:2px;word-break:break-word;background-color:rgba(51,51,51,0.05);color:rgba(51,51,51,0.9);padding:0 5px;border:1px solid rgba(51,51,51,0.1);font-family:Courier,monospace;}/*!sc*/
+.sc-lbFCLI+.sc-lbFCLI{margin-left:0;}/*!sc*/
+data-styled.g67[id="sc-lbFCLI"]{content:"OXDYs,"}/*!sc*/
+.enoyBT{border-radius:2px;background-color:rgba(104,104,207,0.05);color:rgba(50,50,159,0.9);margin:0 5px;padding:0 5px;border:1px solid rgba(50,50,159,0.1);}/*!sc*/
+.sc-cljLBy+.sc-cljLBy{margin-left:0;}/*!sc*/
+data-styled.g69[id="sc-cljLBy"]{content:"enoyBT,"}/*!sc*/
+.hzxDQO:after{content:' and ';font-weight:normal;}/*!sc*/
+.hzxDQO:last-child:after{content:none;}/*!sc*/
+.hzxDQO a{text-decoration:auto;color:#32329f;}/*!sc*/
+.hzxDQO a:visited{color:#32329f;}/*!sc*/
+.hzxDQO a:hover{color:#6868cf;text-decoration:auto;}/*!sc*/
+data-styled.g82[id="sc-hPfayn"]{content:"hzxDQO,"}/*!sc*/
+.dVYuXz{white-space:nowrap;}/*!sc*/
+.dVYuXz:after{content:' or ';white-space:pre;}/*!sc*/
+.dVYuXz:last-child:after,.dVYuXz:only-child:after{content:none;}/*!sc*/
+.dVYuXz a{text-decoration:auto;color:#32329f;}/*!sc*/
+.dVYuXz a:visited{color:#32329f;}/*!sc*/
+.dVYuXz a:hover{color:#6868cf;text-decoration:auto;}/*!sc*/
+data-styled.g83[id="sc-dtnsVa"]{content:"dVYuXz,"}/*!sc*/
+.jdqJPb{flex:1 1 auto;cursor:pointer;}/*!sc*/
+data-styled.g84[id="sc-dalEhJ"]{content:"jdqJPb,"}/*!sc*/
+.cVAkzL{width:75%;text-overflow:ellipsis;border-radius:4px;overflow:hidden;}/*!sc*/
+@media screen and (max-width: 50rem){.cVAkzL{margin-top:10px;}}/*!sc*/
+data-styled.g85[id="sc-jTPGds"]{content:"cVAkzL,"}/*!sc*/
+.kEkHzF{display:inline-block;margin:0;}/*!sc*/
+data-styled.g86[id="sc-jQQpTv"]{content:"kEkHzF,"}/*!sc*/
+.kGZLat{width:100%;display:flex;margin:1em 0;flex-direction:row;}/*!sc*/
+@media screen and (max-width: 50rem){.kGZLat{flex-direction:column;}}/*!sc*/
+data-styled.g87[id="sc-fuYIqi"]{content:"kGZLat,"}/*!sc*/
+.cBgvIi{margin-top:0;margin-bottom:0.5em;}/*!sc*/
+data-styled.g93[id="sc-ctiVdb"]{content:"cBgvIi,"}/*!sc*/
+.jjsIAS{width:9ex;display:inline-block;height:13px;line-height:13px;background-color:#333;border-radius:3px;background-repeat:no-repeat;background-position:6px 4px;font-size:7px;font-family:Verdana,sans-serif;color:white;text-transform:uppercase;text-align:center;font-weight:bold;vertical-align:middle;margin-right:6px;margin-top:2px;}/*!sc*/
+.jjsIAS.get{background-color:#2F8132;}/*!sc*/
+.jjsIAS.post{background-color:#186FAF;}/*!sc*/
+.jjsIAS.put{background-color:#95507c;}/*!sc*/
+.jjsIAS.options{background-color:#947014;}/*!sc*/
+.jjsIAS.patch{background-color:#bf581d;}/*!sc*/
+.jjsIAS.delete{background-color:#cc3333;}/*!sc*/
+.jjsIAS.basic{background-color:#707070;}/*!sc*/
+.jjsIAS.link{background-color:#07818F;}/*!sc*/
+.jjsIAS.head{background-color:#A23DAD;}/*!sc*/
+.jjsIAS.hook{background-color:#32329f;}/*!sc*/
+.jjsIAS.schema{background-color:#707070;}/*!sc*/
+data-styled.g101[id="sc-XpSrr"]{content:"jjsIAS,"}/*!sc*/
+.dqIuaF{margin:0;padding:0;}/*!sc*/
+.dqIuaF:first-child{padding-bottom:32px;}/*!sc*/
+.sc-ilnrqe .sc-ilnrqe{font-size:0.929em;}/*!sc*/
+.gTfiRs{margin:0;padding:0;display:none;}/*!sc*/
+.gTfiRs:first-child{padding-bottom:32px;}/*!sc*/
+.sc-ilnrqe .sc-ilnrqe{font-size:0.929em;}/*!sc*/
+data-styled.g102[id="sc-ilnrqe"]{content:"dqIuaF,gTfiRs,"}/*!sc*/
+.cQETmj{list-style:none inside none;overflow:hidden;text-overflow:ellipsis;padding:0;}/*!sc*/
+data-styled.g103[id="sc-uMZhz"]{content:"cQETmj,"}/*!sc*/
+.buxoPL{cursor:pointer;color:#333333;margin:0;padding:12.5px 20px;display:flex;justify-content:space-between;font-family:Montserrat,sans-serif;font-size:0.929em;text-transform:none;background-color:#fafafa;}/*!sc*/
+.buxoPL:hover{color:#32329f;background-color:#e1e1e1;}/*!sc*/
+.buxoPL .sc-dYjPD{height:1.5em;width:1.5em;}/*!sc*/
+.buxoPL .sc-dYjPD polygon{fill:#333333;}/*!sc*/
+.cGOuox{cursor:pointer;color:#333333;margin:0;padding:12.5px 20px;display:flex;justify-content:space-between;font-family:Montserrat,sans-serif;background-color:#fafafa;}/*!sc*/
+.cGOuox:hover{color:#32329f;background-color:#ededed;}/*!sc*/
+.cGOuox .sc-dYjPD{height:1.5em;width:1.5em;}/*!sc*/
+.cGOuox .sc-dYjPD polygon{fill:#333333;}/*!sc*/
+data-styled.g104[id="sc-bitxrY"]{content:"buxoPL,cGOuox,"}/*!sc*/
+.ehBKwY{display:inline-block;vertical-align:middle;width:calc(100% - 38px);overflow:hidden;text-overflow:ellipsis;}/*!sc*/
+data-styled.g105[id="sc-eHoOIp"]{content:"ehBKwY,"}/*!sc*/
+.gtBLyN{font-size:0.8em;margin-top:10px;text-align:center;position:fixed;width:260px;bottom:0;background:#fafafa;}/*!sc*/
+.gtBLyN a,.gtBLyN a:visited,.gtBLyN a:hover{color:#333333!important;padding:5px 0;border-top:1px solid #e1e1e1;text-decoration:none;display:flex;align-items:center;justify-content:center;}/*!sc*/
+.gtBLyN img{width:15px;margin-right:5px;}/*!sc*/
+@media screen and (max-width: 50rem){.gtBLyN{width:100%;}}/*!sc*/
+data-styled.g106[id="sc-hAkAFK"]{content:"gtBLyN,"}/*!sc*/
+.fYxpnv{cursor:pointer;position:relative;margin-bottom:5px;}/*!sc*/
+data-styled.g112[id="sc-fXwuWv"]{content:"fYxpnv,"}/*!sc*/
+.dsIRaZ{font-family:Courier,monospace;margin-left:10px;flex:1;overflow-x:hidden;text-overflow:ellipsis;}/*!sc*/
+data-styled.g113[id="sc-FpjRO"]{content:"dsIRaZ,"}/*!sc*/
+.jzaJhV{outline:0;color:inherit;width:100%;text-align:left;cursor:pointer;padding:10px 30px 10px 20px;border-radius:4px 4px 0 0;background-color:#11171a;display:flex;white-space:nowrap;align-items:center;border:1px solid transparent;border-bottom:0;transition:border-color 0.25s ease;}/*!sc*/
+.jzaJhV ..sc-FpjRO{color:#ffffff;}/*!sc*/
+.jzaJhV:focus{box-shadow:inset 0 2px 2px rgba(0, 0, 0, 0.45),0 2px 0 rgba(128, 128, 128, 0.25);}/*!sc*/
+data-styled.g114[id="sc-jWMFtl"]{content:"jzaJhV,"}/*!sc*/
+.hlSrtW{font-size:0.929em;line-height:20px;background-color:#2F8132;color:#ffffff;padding:3px 10px;text-transform:uppercase;font-family:Montserrat,sans-serif;margin:0;}/*!sc*/
+.hOENFc{font-size:0.929em;line-height:20px;background-color:#186FAF;color:#ffffff;padding:3px 10px;text-transform:uppercase;font-family:Montserrat,sans-serif;margin:0;}/*!sc*/
+.dQBYof{font-size:0.929em;line-height:20px;background-color:#95507c;color:#ffffff;padding:3px 10px;text-transform:uppercase;font-family:Montserrat,sans-serif;margin:0;}/*!sc*/
+.iINwyG{font-size:0.929em;line-height:20px;background-color:#cc3333;color:#ffffff;padding:3px 10px;text-transform:uppercase;font-family:Montserrat,sans-serif;margin:0;}/*!sc*/
+data-styled.g115[id="sc-eEFuoE"]{content:"hlSrtW,hOENFc,dQBYof,iINwyG,"}/*!sc*/
+.tUxhh{position:absolute;width:100%;z-index:100;background:#fafafa;color:#263238;box-sizing:border-box;box-shadow:0 0 6px rgba(0, 0, 0, 0.33);overflow:hidden;border-bottom-left-radius:4px;border-bottom-right-radius:4px;transition:all 0.25s ease;visibility:hidden;transform:translateY(-50%) scaleY(0);}/*!sc*/
+data-styled.g116[id="sc-fmtEmb"]{content:"tUxhh,"}/*!sc*/
+.bAnPPh{padding:10px;}/*!sc*/
+data-styled.g117[id="sc-ljIcGq"]{content:"bAnPPh,"}/*!sc*/
+.PEJyb{padding:5px;border:1px solid #ccc;background:#fff;word-break:break-all;color:#32329f;}/*!sc*/
+.PEJyb >span{color:#333333;}/*!sc*/
+data-styled.g118[id="sc-jlJOIR"]{content:"PEJyb,"}/*!sc*/
+.bxWqzP{text-transform:lowercase;margin-left:0;line-height:1.5em;}/*!sc*/
+data-styled.g119[id="sc-dTCDEk"]{content:"bxWqzP,"}/*!sc*/
+.iSTZHA{display:block;border:0;width:100%;text-align:left;padding:10px;border-radius:2px;margin-bottom:4px;line-height:1.5em;cursor:pointer;color:#1d8127;background-color:rgba(29,129,39,0.07);}/*!sc*/
+.iSTZHA:focus{outline:auto #1d8127;}/*!sc*/
+.cKkXxa{display:block;border:0;width:100%;text-align:left;padding:10px;border-radius:2px;margin-bottom:4px;line-height:1.5em;cursor:pointer;color:#d41f1c;background-color:rgba(212,31,28,0.07);}/*!sc*/
+.cKkXxa:focus{outline:auto #d41f1c;}/*!sc*/
+data-styled.g121[id="sc-cbuLjy"]{content:"iSTZHA,cKkXxa,"}/*!sc*/
+.cqDULz{vertical-align:top;}/*!sc*/
+data-styled.g124[id="sc-fXmTIC"]{content:"cqDULz,"}/*!sc*/
+.hgNHCh{font-size:1.3em;padding:0.2em 0;margin:3em 0 1.1em;color:#333333;font-weight:normal;}/*!sc*/
+data-styled.g125[id="sc-fINhYD"]{content:"hgNHCh,"}/*!sc*/
+.ktZmcf{margin-bottom:30px;}/*!sc*/
+data-styled.g130[id="sc-iFUzrA"]{content:"ktZmcf,"}/*!sc*/
+.kjuNaM{user-select:none;width:20px;height:20px;align-self:center;display:flex;flex-direction:column;color:#32329f;}/*!sc*/
+data-styled.g131[id="sc-iruNHB"]{content:"kjuNaM,"}/*!sc*/
+.cczbHe{width:260px;background-color:#fafafa;overflow:hidden;display:flex;flex-direction:column;backface-visibility:hidden;height:100vh;position:sticky;position:-webkit-sticky;top:0;}/*!sc*/
+@media screen and (max-width: 50rem){.cczbHe{position:fixed;z-index:20;width:100%;background:#fafafa;display:none;}}/*!sc*/
+@media print{.cczbHe{display:none;}}/*!sc*/
+data-styled.g132[id="sc-eVYbGh"]{content:"cczbHe,"}/*!sc*/
+.ddPveE{outline:none;user-select:none;background-color:#f2f2f2;color:#32329f;display:none;cursor:pointer;position:fixed;right:20px;z-index:100;border-radius:50%;box-shadow:0 0 20px rgba(0, 0, 0, 0.3);bottom:44px;width:60px;height:60px;padding:0 20px;}/*!sc*/
+@media screen and (max-width: 50rem){.ddPveE{display:flex;}}/*!sc*/
+.ddPveE svg{color:#0065FB;}/*!sc*/
+@media print{.ddPveE{display:none;}}/*!sc*/
+data-styled.g133[id="sc-kTmAaw"]{content:"ddPveE,"}/*!sc*/
+.jetsmW{font-family:Roboto,sans-serif;font-size:14px;font-weight:400;line-height:1.5em;color:#333333;display:flex;position:relative;text-align:left;-webkit-font-smoothing:antialiased;font-smoothing:antialiased;text-rendering:optimizeSpeed!important;tap-highlight-color:rgba(0, 0, 0, 0);text-size-adjust:100%;}/*!sc*/
+.jetsmW *{box-sizing:border-box;-webkit-tap-highlight-color:rgba(255, 255, 255, 0);}/*!sc*/
+data-styled.g134[id="sc-dwkskT"]{content:"jetsmW,"}/*!sc*/
+.ldXCvc{z-index:1;position:relative;overflow:hidden;width:calc(100% - 260px);contain:layout;}/*!sc*/
+@media print,screen and (max-width: 50rem){.ldXCvc{width:100%;}}/*!sc*/
+data-styled.g135[id="sc-jtyQFi"]{content:"ldXCvc,"}/*!sc*/
+.bjzTxL{background:#263238;position:absolute;top:0;bottom:0;right:0;width:calc((100% - 260px) * 0.4);}/*!sc*/
+@media print,screen and (max-width: 75rem){.bjzTxL{display:none;}}/*!sc*/
+data-styled.g136[id="sc-ekVkVN"]{content:"bjzTxL,"}/*!sc*/
+.uMSfb{padding:5px 0;}/*!sc*/
+data-styled.g137[id="sc-kijJqc"]{content:"uMSfb,"}/*!sc*/
+.fTcICO{width:calc(100% - 40px);box-sizing:border-box;margin:0 20px;padding:5px 10px 5px 20px;border:0;border-bottom:1px solid #e1e1e1;font-family:Roboto,sans-serif;font-weight:bold;font-size:13px;color:#333333;background-color:transparent;outline:none;}/*!sc*/
+data-styled.g138[id="sc-cLhBAz"]{content:"fTcICO,"}/*!sc*/
+.kAmnlO{position:absolute;left:20px;height:1.8em;width:0.9em;}/*!sc*/
+.kAmnlO path{fill:#333333;}/*!sc*/
+data-styled.g139[id="sc-iIvZUO"]{content:"kAmnlO,"}/*!sc*/
+</style>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+</head>
 
-parserOptions:
-  duplicateKeys: error
-  incompatibleValues: error
+<body>
 
-rules:
+      <div id="redoc"><div class="sc-dwkskT jetsmW redoc-wrap"><div class="sc-eVYbGh cczbHe menu-content" style="top:0px;height:calc(100vh - 0px)"><div role="search" class="sc-kijJqc uMSfb"><svg class="sc-iIvZUO kAmnlO search-icon" version="1.1" viewBox="0 0 1000 1000" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px"><path d="M968.2,849.4L667.3,549c83.9-136.5,66.7-317.4-51.7-435.6C477.1-25,252.5-25,113.9,113.4c-138.5,138.3-138.5,362.6,0,501C219.2,730.1,413.2,743,547.6,666.5l301.9,301.4c43.6,43.6,76.9,14.9,104.2-12.4C981,928.3,1011.8,893,968.2,849.4z M524.5,522c-88.9,88.7-233,88.7-321.8,0c-88.9-88.7-88.9-232.6,0-321.3c88.9-88.7,233-88.7,321.8,0C613.4,289.4,613.4,433.3,524.5,522z"></path></svg><input placeholder="Search..." aria-label="Search" type="text" class="sc-cLhBAz fTcICO search-input" value=""/></div><div class="sc-kLEbxe iOXjCz scrollbar-container undefined"><ul role="menu" class="sc-ilnrqe dqIuaF"><li tabindex="0" depth="1" data-item-id="section/Autenticacao" role="menuitem" aria-label="Autenticação" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY buxoPL -depth1"><span width="calc(100% - 38px)" title="Autenticação" class="sc-eHoOIp ehBKwY">Autenticação</span></label></li><li tabindex="0" depth="1" data-item-id="section/Autorizacao-por-escopos" role="menuitem" aria-label="Autorização por escopos" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY buxoPL -depth1"><span width="calc(100% - 38px)" title="Autorização por escopos" class="sc-eHoOIp ehBKwY">Autorização por escopos</span></label></li><li tabindex="0" depth="1" data-item-id="section/Mascaramento-de-dados" role="menuitem" aria-label="Mascaramento de dados" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY buxoPL -depth1"><span width="calc(100% - 38px)" title="Mascaramento de dados" class="sc-eHoOIp ehBKwY">Mascaramento de dados</span></label></li><li tabindex="0" depth="1" data-item-id="tag/Clientes" role="menuitem" aria-label="Clientes" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY buxoPL -depth1"><span width="calc(100% - 38px)" title="Clientes" class="sc-eHoOIp ehBKwY">Clientes</span><svg class="sc-dYjPD kdgFPv" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></label><ul class="sc-ilnrqe gTfiRs"><li tabindex="0" depth="2" data-item-id="tag/Clientes/operation/listarClientes" role="menuitem" aria-label="Listar clientes" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY cGOuox -depth2"><span type="get" class="sc-XpSrr jjsIAS operation-type get">get</span><span tabindex="0" width="calc(100% - 38px)" class="sc-eHoOIp ehBKwY">Listar clientes</span></label></li><li tabindex="0" depth="2" data-item-id="tag/Clientes/operation/cadastrarCliente" role="menuitem" aria-label="Cadastrar cliente" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY cGOuox -depth2"><span type="post" class="sc-XpSrr jjsIAS operation-type post">post</span><span tabindex="0" width="calc(100% - 38px)" class="sc-eHoOIp ehBKwY">Cadastrar cliente</span></label></li><li tabindex="0" depth="2" data-item-id="tag/Clientes/operation/consultarClientePorId" role="menuitem" aria-label="Consultar cliente por ID" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY cGOuox -depth2"><span type="get" class="sc-XpSrr jjsIAS operation-type get">get</span><span tabindex="0" width="calc(100% - 38px)" class="sc-eHoOIp ehBKwY">Consultar cliente por ID</span></label></li><li tabindex="0" depth="2" data-item-id="tag/Clientes/operation/atualizarCliente" role="menuitem" aria-label="Atualizar cliente" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY cGOuox -depth2"><span type="put" class="sc-XpSrr jjsIAS operation-type put">put</span><span tabindex="0" width="calc(100% - 38px)" class="sc-eHoOIp ehBKwY">Atualizar cliente</span></label></li><li tabindex="0" depth="2" data-item-id="tag/Clientes/operation/removerCliente" role="menuitem" aria-label="Remover cliente" aria-expanded="false" class="sc-uMZhz cQETmj"><label class="sc-bitxrY cGOuox -depth2"><span type="delete" class="sc-XpSrr jjsIAS operation-type delete">del</span><span tabindex="0" width="calc(100% - 38px)" class="sc-eHoOIp ehBKwY">Remover cliente</span></label></li></ul></li></ul><div class="sc-hAkAFK gtBLyN"><a target="_blank" rel="noopener noreferrer" href="https://redocly.com/redoc/">API docs by Redocly</a></div></div></div><div class="sc-kTmAaw ddPveE"><div class="sc-iruNHB kjuNaM"><svg class="" style="transform:translate(2px, -4px) rotate(180deg);transition:transform 0.2s ease" viewBox="0 0 926.23699 573.74994" version="1.1" x="0px" y="0px" width="15" height="15"><g transform="translate(904.92214,-879.1482)"><path d="
+          m -673.67664,1221.6502 -231.2455,-231.24803 55.6165,
+          -55.627 c 30.5891,-30.59485 56.1806,-55.627 56.8701,-55.627 0.6894,
+          0 79.8637,78.60862 175.9427,174.68583 l 174.6892,174.6858 174.6892,
+          -174.6858 c 96.079,-96.07721 175.253196,-174.68583 175.942696,
+          -174.68583 0.6895,0 26.281,25.03215 56.8701,
+          55.627 l 55.6165,55.627 -231.245496,231.24803 c -127.185,127.1864
+          -231.5279,231.248 -231.873,231.248 -0.3451,0 -104.688,
+          -104.0616 -231.873,-231.248 z
+        " fill="currentColor"></path></g></svg><svg class="" style="transform:translate(2px, 4px);transition:transform 0.2s ease" viewBox="0 0 926.23699 573.74994" version="1.1" x="0px" y="0px" width="15" height="15"><g transform="translate(904.92214,-879.1482)"><path d="
+          m -673.67664,1221.6502 -231.2455,-231.24803 55.6165,
+          -55.627 c 30.5891,-30.59485 56.1806,-55.627 56.8701,-55.627 0.6894,
+          0 79.8637,78.60862 175.9427,174.68583 l 174.6892,174.6858 174.6892,
+          -174.6858 c 96.079,-96.07721 175.253196,-174.68583 175.942696,
+          -174.68583 0.6895,0 26.281,25.03215 56.8701,
+          55.627 l 55.6165,55.627 -231.245496,231.24803 c -127.185,127.1864
+          -231.5279,231.248 -231.873,231.248 -0.3451,0 -104.688,
+          -104.0616 -231.873,-231.248 z
+        " fill="currentColor"></path></g></svg></div></div><div class="sc-jtyQFi ldXCvc api-content"><div class="sc-eCQgVK jleRXN"><div class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN api-info"><h1 class="sc-fuztkK sc-ctiVdb eRMVDe cBgvIi">API de Gestão de Clientes<!-- --> <span>(<!-- -->1.0<!-- -->)</span></h1><p>Download OpenAPI specification<!-- -->:</p><div class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV"></div><div data-role="redoc-summary" html="" class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV"></div><div data-role="redoc-description" html="&lt;p&gt;API responsável pelo cadastro, consulta, atualização e remoção de clientes.&lt;/p&gt;
+&lt;p&gt;Esta API utiliza a metodologia API First: o contrato é definido antes
+da implementação do código.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV"><p>API responsável pelo cadastro, consulta, atualização e remoção de clientes.</p>
+<p>Esta API utiliza a metodologia API First: o contrato é definido antes
+da implementação do código.</p>
+</div></div></div></div><div id="section/Autenticacao" data-section-id="section/Autenticacao" class="sc-eCQgVK jleRXN"><div class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-jrIDTr iSbGeC"><a class="sc-crPgjm jmoZom" href="#section/Autenticacao" aria-label="section/Autenticacao"></a>Autenticação</h2></div></div><div class="sc-hKVpXn kmAAAV"><div class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV redoc-markdown " html="&lt;p&gt;Todos os endpoints exigem um token JWT válido enviado no cabeçalho:&lt;/p&gt;
+&lt;p&gt;Authorization: Bearer {token}&lt;/p&gt;
+"><p>Todos os endpoints exigem um token JWT válido enviado no cabeçalho:</p>
+<p>Authorization: Bearer {token}</p>
+</div></div></div><div id="section/Autorizacao-por-escopos" data-section-id="section/Autorizacao-por-escopos" class="sc-eCQgVK jleRXN"><div class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-jrIDTr iSbGeC"><a class="sc-crPgjm jmoZom" href="#section/Autorizacao-por-escopos" aria-label="section/Autorizacao-por-escopos"></a>Autorização por escopos</h2></div></div><div class="sc-hKVpXn kmAAAV"><div class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV redoc-markdown " html="&lt;p&gt;Além de estar autenticado, o usuário deve possuir o escopo necessário
+para executar cada operação:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;clientes.read: consultar clientes;&lt;/li&gt;
+&lt;li&gt;clientes.write: cadastrar ou atualizar clientes;&lt;/li&gt;
+&lt;li&gt;clientes.delete: remover clientes.&lt;/li&gt;
+&lt;/ul&gt;
+"><p>Além de estar autenticado, o usuário deve possuir o escopo necessário
+para executar cada operação:</p>
+<ul>
+<li>clientes.read: consultar clientes;</li>
+<li>clientes.write: cadastrar ou atualizar clientes;</li>
+<li>clientes.delete: remover clientes.</li>
+</ul>
+</div></div></div><div id="section/Mascaramento-de-dados" data-section-id="section/Mascaramento-de-dados" class="sc-eCQgVK jleRXN"><div class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-jrIDTr iSbGeC"><a class="sc-crPgjm jmoZom" href="#section/Mascaramento-de-dados" aria-label="section/Mascaramento-de-dados"></a>Mascaramento de dados</h2></div></div><div class="sc-hKVpXn kmAAAV"><div class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV redoc-markdown " html="&lt;p&gt;Os dados sensíveis devem ser mascarados antes de serem retornados:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;nome: exibido integralmente;&lt;/li&gt;
+&lt;li&gt;CPF: exibido parcialmente;&lt;/li&gt;
+&lt;li&gt;telefone: exibido parcialmente;&lt;/li&gt;
+&lt;li&gt;e-mail: exibido parcialmente;&lt;/li&gt;
+&lt;li&gt;senha, token e credenciais: nunca devem ser retornados.&lt;/li&gt;
+&lt;/ul&gt;
+"><p>Os dados sensíveis devem ser mascarados antes de serem retornados:</p>
+<ul>
+<li>nome: exibido integralmente;</li>
+<li>CPF: exibido parcialmente;</li>
+<li>telefone: exibido parcialmente;</li>
+<li>e-mail: exibido parcialmente;</li>
+<li>senha, token e credenciais: nunca devem ser retornados.</li>
+</ul>
+</div></div></div><div id="tag/Clientes" data-section-id="tag/Clientes" class="sc-eCQgVK jleRXN"><div class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/Clientes" aria-label="tag/Clientes"></a>Clientes</h2></div></div><div class="sc-hKVpXn kmAAAV"><div class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV redoc-markdown " html="&lt;p&gt;Operações relacionadas à gestão de clientes&lt;/p&gt;
+"><p>Operações relacionadas à gestão de clientes</p>
+</div></div></div><div id="tag/Clientes/operation/listarClientes" data-section-id="tag/Clientes/operation/listarClientes" class="sc-eCQgVK grDwca"><div data-section-id="operation/listarClientes" id="operation/listarClientes" class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/Clientes/operation/listarClientes" aria-label="tag/Clientes/operation/listarClientes"></a>Listar clientes<!-- --> </h2><div class="sc-iFUzrA ktZmcf"><div html="&lt;p&gt;Retorna a lista de clientes cadastrados.&lt;/p&gt;
+&lt;p&gt;Exige autenticação por token JWT e o escopo &lt;code&gt;clientes.read&lt;/code&gt;.
+Os dados sensíveis são retornados de forma parcialmente mascarada.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV"><p>Retorna a lista de clientes cadastrados.</p>
+<p>Exige autenticação por token JWT e o escopo <code>clientes.read</code>.
+Os dados sensíveis são retornados de forma parcialmente mascarada.</p>
+</div></div><div class="sc-fuYIqi kGZLat"><div class="sc-dalEhJ jdqJPb"><h5 class="sc-iqkkDd sc-jQQpTv kcvrhp kEkHzF">Authorizations:</h5><svg class="sc-dYjPD bEEWJa" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></div><div class="sc-jTPGds cVAkzL"><span class="sc-dtnsVa dVYuXz"><span class="sc-hPfayn hzxDQO"><i>bearerAuth</i></span></span></div></div><div><h3 class="sc-fINhYD hgNHCh">Responses</h3><div><button class="sc-cbuLjy iSTZHA"><svg class="sc-dYjPD gngmNp" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">200<!-- --> </strong><div html="&lt;p&gt;Lista de clientes consultada com sucesso&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Lista de clientes consultada com sucesso</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">401<!-- --> </strong><div html="&lt;p&gt;Token JWT não enviado, inválido ou expirado.&lt;/p&gt;
+&lt;p&gt;O código 401 indica que a identidade do usuário não pôde
+ser confirmada.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Token JWT não enviado, inválido ou expirado.</p>
+<p>O código 401 indica que a identidade do usuário não pôde
+ser confirmada.</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">403<!-- --> </strong><div html="&lt;p&gt;Usuário autenticado, mas sem o escopo necessário para executar
+a operação.&lt;/p&gt;
+&lt;p&gt;O código 403 indica que a identidade foi reconhecida, porém
+o usuário não possui autorização suficiente.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Usuário autenticado, mas sem o escopo necessário para executar
+a operação.</p>
+<p>O código 403 indica que a identidade foi reconhecida, porém
+o usuário não possui autorização suficiente.</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">500<!-- --> </strong><div html="&lt;p&gt;Falha inesperada no servidor ao processar a requisição&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Falha inesperada no servidor ao processar a requisição</p>
+</div></button></div></div></div><div class="sc-jSppWd sc-gKkgUA fpMlmc bdQQyo"><div class="sc-fXwuWv fYxpnv"><button class="sc-jWMFtl jzaJhV"><span type="get" class="sc-eEFuoE hlSrtW http-verb get">get</span><span class="sc-FpjRO dsIRaZ">/clientes</span><svg class="sc-dYjPD bQKUih" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-fmtEmb tUxhh"><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;Servidor de produção&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Servidor de produção</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>https://api.exemplo.com/v1</span>/clientes</div></div></div><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;Servidor de desenvolvimento&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Servidor de desenvolvimento</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>http://localhost:8080/v1</span>/clientes</div></div></div></div></div><div><h3 class="sc-kEbgWM iamDfj"> <!-- -->Response samples<!-- --> </h3><div class="sc-cxxQMU kibfTX" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-success react-tabs__tab--selected" role="tab" id="tab_R_174qa_0" aria-selected="true" aria-disabled="false" aria-controls="panel_R_174qa_0" tabindex="0" data-rttab="true">200</li><li class="tab-error" role="tab" id="tab_R_174qa_1" aria-selected="false" aria-disabled="false" aria-controls="panel_R_174qa_1" data-rttab="true">401</li><li class="tab-error" role="tab" id="tab_R_174qa_2" aria-selected="false" aria-disabled="false" aria-controls="panel_R_174qa_2" data-rttab="true">403</li><li class="tab-error" role="tab" id="tab_R_174qa_3" aria-selected="false" aria-disabled="false" aria-controls="panel_R_174qa_3" data-rttab="true">500</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel_R_174qa_0" aria-labelledby="tab_R_174qa_0"><div><div class="sc-cNSlRw bMFMGt"><span class="sc-bBzIOb BuCyN">Content type</span><div class="sc-dPqFhK kgKexQ">application/json</div></div><div class="sc-hUheUT jUCYlq"><div class="sc-cTZdpT hHzuQA"><div class="sc-giQkEn dzKJV"><button><div class="sc-jcgtOs feYhXE">Copy</div></button><button> Expand all </button><button> Collapse all </button></div><div tabindex="0" class="sc-iJSMbW fiNpIH sc-jNDflC jgTAJz"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"success"</span>: <span class="token boolean">true</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"message"</span>: <span class="token string">&quot;Clientes consultados com sucesso.&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"data"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">[</span><span class="ellipsis"></span><ul class="array collapsible"><li><div class="hoverable collapsed"><button class="collapser" aria-label="expand"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"id"</span>: <span class="token number">101</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"nome"</span>: <span class="token string">&quot;Ana Carolina Souza&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"cpf"</span>: <span class="token string">&quot;***.456.789-**&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"telefone"</span>: <span class="token string">&quot;(11) *****-4321&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"email"</span>: <span class="token string">&quot;a***@empresa.com&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"status"</span>: <span class="token string">&quot;ATIVO&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"criadoEm"</span>: <span class="token string">&quot;2026-07-21T14:30:00Z&quot;</span></div></li></ul><span class="token punctuation">}</span>,</div></li><li><div class="hoverable collapsed"><button class="collapser" aria-label="expand"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"id"</span>: <span class="token number">102</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"nome"</span>: <span class="token string">&quot;Carlos Henrique Lima&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"cpf"</span>: <span class="token string">&quot;***.987.654-**&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"telefone"</span>: <span class="token string">&quot;(21) *****-7890&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"email"</span>: <span class="token string">&quot;c***@exemplo.com&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"status"</span>: <span class="token string">&quot;ATIVO&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"criadoEm"</span>: <span class="token string">&quot;2026-07-21T15:00:00Z&quot;</span></div></li></ul><span class="token punctuation">}</span></div></li></ul><span class="token punctuation">]</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_174qa_1" aria-labelledby="tab_R_174qa_1"></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_174qa_2" aria-labelledby="tab_R_174qa_2"></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_174qa_3" aria-labelledby="tab_R_174qa_3"></div></div></div></div></div></div><div id="tag/Clientes/operation/cadastrarCliente" data-section-id="tag/Clientes/operation/cadastrarCliente" class="sc-eCQgVK grDwca"><div data-section-id="operation/cadastrarCliente" id="operation/cadastrarCliente" class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/Clientes/operation/cadastrarCliente" aria-label="tag/Clientes/operation/cadastrarCliente"></a>Cadastrar cliente<!-- --> </h2><div class="sc-iFUzrA ktZmcf"><div html="&lt;p&gt;Cadastra um novo cliente.&lt;/p&gt;
+&lt;p&gt;Exige autenticação por token JWT e o escopo &lt;code&gt;clientes.write&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;O CPF deve possuir um formato válido e não pode estar cadastrado
+anteriormente.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV"><p>Cadastra um novo cliente.</p>
+<p>Exige autenticação por token JWT e o escopo <code>clientes.write</code>.</p>
+<p>O CPF deve possuir um formato válido e não pode estar cadastrado
+anteriormente.</p>
+</div></div><div class="sc-fuYIqi kGZLat"><div class="sc-dalEhJ jdqJPb"><h5 class="sc-iqkkDd sc-jQQpTv kcvrhp kEkHzF">Authorizations:</h5><svg class="sc-dYjPD bEEWJa" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></div><div class="sc-jTPGds cVAkzL"><span class="sc-dtnsVa dVYuXz"><span class="sc-hPfayn hzxDQO"><i>bearerAuth</i></span></span></div></div><h5 class="sc-iqkkDd kcvrhp">Request Body schema: <span class="sc-gXvOjn kxMqOs">application/json</span><div class="sc-gSILEF sc-eIYgEQ sc-dTCDEk jMRTsl dHYagA bxWqzP">required</div></h5><div html="&lt;p&gt;Dados necessários para o cadastro do cliente&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV"><p>Dados necessários para o cadastro do cliente</p>
+</div><table class="sc-hHopjF bsjUmE"><tbody><tr class=""><td kind="field" title="nome" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">nome</span><div class="sc-gSILEF sc-eIYgEQ jMRTsl dHYagA">required</div></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">string</span><span> <span class="sc-gSILEF sc-cljLBy jMRTsl enoyBT"> <!-- -->[ 3 .. 150 ] characters<!-- --> </span></span></div> <div><div html="&lt;p&gt;Nome completo do cliente&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Nome completo do cliente</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="cpf" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">cpf</span><div class="sc-gSILEF sc-eIYgEQ jMRTsl dHYagA">required</div></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">string</span><span class="sc-gSILEF sc-eibAPZ jMRTsl grmBkm">^\d{3}\.\d{3}\.\d{3}-\d{2}$</span></div> <div><div html="&lt;p&gt;CPF do cliente.&lt;/p&gt;
+&lt;p&gt;O formato deve ser validado pelo servidor. A expressão regular
+verifica apenas a estrutura do valor e não substitui a validação
+dos dígitos verificadores.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>CPF do cliente.</p>
+<p>O formato deve ser validado pelo servidor. A expressão regular
+verifica apenas a estrutura do valor e não substitui a validação
+dos dígitos verificadores.</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="telefone" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">telefone</span><div class="sc-gSILEF sc-eIYgEQ jMRTsl dHYagA">required</div></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">string</span><span> <span class="sc-gSILEF sc-cljLBy jMRTsl enoyBT"> <!-- -->[ 10 .. 15 ] characters<!-- --> </span></span></div> <div><div html="&lt;p&gt;Telefone do cliente com DDD&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Telefone do cliente com DDD</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="email" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">email</span><div class="sc-gSILEF sc-eIYgEQ jMRTsl dHYagA">required</div></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">string</span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ"> <!-- -->&lt;<!-- -->email<!-- -->&gt;<!-- --> </span><span> <span class="sc-gSILEF sc-cljLBy jMRTsl enoyBT"> <!-- -->&lt;= 254 characters<!-- --> </span></span></div> <div><div html="&lt;p&gt;Endereço de e-mail do cliente&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Endereço de e-mail do cliente</p>
+</div></div></div></td></tr><tr class="last "><td kind="field" title="status" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">status</span><div class="sc-gSILEF sc-eIYgEQ jMRTsl dHYagA">required</div></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">string</span><span class="sc-gSILEF sc-jePOid jMRTsl ehlihR"> (<!-- -->StatusCliente<!-- -->) </span></div><div><span class="sc-gSILEF jMRTsl"> <!-- -->Enum<!-- -->:</span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;ATIVO&quot;</span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;INATIVO&quot;</span> </div> <div><div html="&lt;p&gt;Situação atual do cliente&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Situação atual do cliente</p>
+</div></div></div></td></tr></tbody></table><div><h3 class="sc-fINhYD hgNHCh">Responses</h3><div><button class="sc-cbuLjy iSTZHA"><svg class="sc-dYjPD gngmNp" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">201<!-- --> </strong><div html="&lt;p&gt;Cliente cadastrado com sucesso&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Cliente cadastrado com sucesso</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">400<!-- --> </strong><div html="&lt;p&gt;Dados enviados em formato inválido&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Dados enviados em formato inválido</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">401<!-- --> </strong><div html="&lt;p&gt;Token JWT não enviado, inválido ou expirado.&lt;/p&gt;
+&lt;p&gt;O código 401 indica que a identidade do usuário não pôde
+ser confirmada.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Token JWT não enviado, inválido ou expirado.</p>
+<p>O código 401 indica que a identidade do usuário não pôde
+ser confirmada.</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">403<!-- --> </strong><div html="&lt;p&gt;Usuário autenticado, mas sem o escopo necessário para executar
+a operação.&lt;/p&gt;
+&lt;p&gt;O código 403 indica que a identidade foi reconhecida, porém
+o usuário não possui autorização suficiente.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Usuário autenticado, mas sem o escopo necessário para executar
+a operação.</p>
+<p>O código 403 indica que a identidade foi reconhecida, porém
+o usuário não possui autorização suficiente.</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">500<!-- --> </strong><div html="&lt;p&gt;Falha inesperada no servidor ao processar a requisição&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Falha inesperada no servidor ao processar a requisição</p>
+</div></button></div></div></div><div class="sc-jSppWd sc-gKkgUA fpMlmc bdQQyo"><div class="sc-fXwuWv fYxpnv"><button class="sc-jWMFtl jzaJhV"><span type="post" class="sc-eEFuoE hOENFc http-verb post">post</span><span class="sc-FpjRO dsIRaZ">/clientes</span><svg class="sc-dYjPD bQKUih" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-fmtEmb tUxhh"><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;Servidor de produção&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Servidor de produção</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>https://api.exemplo.com/v1</span>/clientes</div></div></div><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;Servidor de desenvolvimento&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Servidor de desenvolvimento</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>http://localhost:8080/v1</span>/clientes</div></div></div></div></div><div><h3 class="sc-kEbgWM iamDfj"> <!-- -->Request samples<!-- --> </h3><div class="sc-cxxQMU kibfTX" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="react-tabs__tab react-tabs__tab--selected" role="tab" id="tab_R_155aa_0" aria-selected="true" aria-disabled="false" aria-controls="panel_R_155aa_0" tabindex="0" data-rttab="true">Payload</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel_R_155aa_0" aria-labelledby="tab_R_155aa_0"><div><div class="sc-cNSlRw bMFMGt"><span class="sc-bBzIOb BuCyN">Content type</span><div class="sc-dPqFhK kgKexQ">application/json</div></div><div class="sc-hUheUT jUCYlq"><div class="sc-cTZdpT hHzuQA"><div class="sc-giQkEn dzKJV"><button><div class="sc-jcgtOs feYhXE">Copy</div></button></div><div tabindex="0" class="sc-iJSMbW fiNpIH sc-jNDflC jgTAJz"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"nome"</span>: <span class="token string">&quot;Ana Carolina Souza&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"cpf"</span>: <span class="token string">&quot;123.456.789-00&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"telefone"</span>: <span class="token string">&quot;11987654321&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"email"</span>: <span class="token string">&quot;ana.souza@empresa.com&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"status"</span>: <span class="token string">&quot;ATIVO&quot;</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div><div><h3 class="sc-kEbgWM iamDfj"> <!-- -->Response samples<!-- --> </h3><div class="sc-cxxQMU kibfTX" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-success react-tabs__tab--selected" role="tab" id="tab_R_175aa_0" aria-selected="true" aria-disabled="false" aria-controls="panel_R_175aa_0" tabindex="0" data-rttab="true">201</li><li class="tab-error" role="tab" id="tab_R_175aa_1" aria-selected="false" aria-disabled="false" aria-controls="panel_R_175aa_1" data-rttab="true">400</li><li class="tab-error" role="tab" id="tab_R_175aa_2" aria-selected="false" aria-disabled="false" aria-controls="panel_R_175aa_2" data-rttab="true">401</li><li class="tab-error" role="tab" id="tab_R_175aa_3" aria-selected="false" aria-disabled="false" aria-controls="panel_R_175aa_3" data-rttab="true">403</li><li class="tab-error" role="tab" id="tab_R_175aa_4" aria-selected="false" aria-disabled="false" aria-controls="panel_R_175aa_4" data-rttab="true">500</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel_R_175aa_0" aria-labelledby="tab_R_175aa_0"><div><div class="sc-cNSlRw bMFMGt"><span class="sc-bBzIOb BuCyN">Content type</span><div class="sc-dPqFhK kgKexQ">application/json</div></div><div class="sc-hUheUT jUCYlq"><div class="sc-cTZdpT hHzuQA"><div class="sc-giQkEn dzKJV"><button><div class="sc-jcgtOs feYhXE">Copy</div></button><button> Expand all </button><button> Collapse all </button></div><div tabindex="0" class="sc-iJSMbW fiNpIH sc-jNDflC jgTAJz"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"success"</span>: <span class="token boolean">true</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"message"</span>: <span class="token string">&quot;Cliente cadastrado com sucesso.&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"data"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"id"</span>: <span class="token number">101</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"nome"</span>: <span class="token string">&quot;Ana Carolina Souza&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"cpf"</span>: <span class="token string">&quot;***.456.789-**&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"telefone"</span>: <span class="token string">&quot;(11) *****-4321&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"email"</span>: <span class="token string">&quot;a***@empresa.com&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"status"</span>: <span class="token string">&quot;ATIVO&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"criadoEm"</span>: <span class="token string">&quot;2026-07-21T14:30:00Z&quot;</span></div></li></ul><span class="token punctuation">}</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_175aa_1" aria-labelledby="tab_R_175aa_1"></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_175aa_2" aria-labelledby="tab_R_175aa_2"></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_175aa_3" aria-labelledby="tab_R_175aa_3"></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_175aa_4" aria-labelledby="tab_R_175aa_4"></div></div></div></div></div></div><div id="tag/Clientes/operation/consultarClientePorId" data-section-id="tag/Clientes/operation/consultarClientePorId" class="sc-eCQgVK grDwca"><div data-section-id="operation/consultarClientePorId" id="operation/consultarClientePorId" class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/Clientes/operation/consultarClientePorId" aria-label="tag/Clientes/operation/consultarClientePorId"></a>Consultar cliente por ID<!-- --> </h2><div class="sc-iFUzrA ktZmcf"><div html="&lt;p&gt;Retorna um cliente específico.&lt;/p&gt;
+&lt;p&gt;Exige autenticação por token JWT e o escopo &lt;code&gt;clientes.read&lt;/code&gt;.
+Os dados sensíveis são retornados de forma parcialmente mascarada.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV"><p>Retorna um cliente específico.</p>
+<p>Exige autenticação por token JWT e o escopo <code>clientes.read</code>.
+Os dados sensíveis são retornados de forma parcialmente mascarada.</p>
+</div></div><div class="sc-fuYIqi kGZLat"><div class="sc-dalEhJ jdqJPb"><h5 class="sc-iqkkDd sc-jQQpTv kcvrhp kEkHzF">Authorizations:</h5><svg class="sc-dYjPD bEEWJa" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></div><div class="sc-jTPGds cVAkzL"><span class="sc-dtnsVa dVYuXz"><span class="sc-hPfayn hzxDQO"><i>bearerAuth</i></span></span></div></div><div><h5 class="sc-iqkkDd kcvrhp">path<!-- --> Parameters</h5><table class="sc-hHopjF bsjUmE"><tbody><tr class="last "><td kind="field" title="id" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">id</span><div class="sc-gSILEF sc-eIYgEQ jMRTsl dHYagA">required</div></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">integer</span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ"> <!-- -->&lt;<!-- -->int64<!-- -->&gt;<!-- --> </span><span> <span class="sc-gSILEF sc-cljLBy jMRTsl enoyBT"> <!-- -->&gt;= 1<!-- --> </span></span></div> <div><span class="sc-gSILEF jMRTsl"> <!-- -->Example:<!-- --> </span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">101</span></div><div><div html="&lt;p&gt;Identificador único do cliente&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Identificador único do cliente</p>
+</div></div></div></td></tr></tbody></table></div><div><h3 class="sc-fINhYD hgNHCh">Responses</h3><div><button class="sc-cbuLjy iSTZHA"><svg class="sc-dYjPD gngmNp" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">200<!-- --> </strong><div html="&lt;p&gt;Cliente consultado com sucesso&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Cliente consultado com sucesso</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">401<!-- --> </strong><div html="&lt;p&gt;Token JWT não enviado, inválido ou expirado.&lt;/p&gt;
+&lt;p&gt;O código 401 indica que a identidade do usuário não pôde
+ser confirmada.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Token JWT não enviado, inválido ou expirado.</p>
+<p>O código 401 indica que a identidade do usuário não pôde
+ser confirmada.</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">403<!-- --> </strong><div html="&lt;p&gt;Usuário autenticado, mas sem o escopo necessário para executar
+a operação.&lt;/p&gt;
+&lt;p&gt;O código 403 indica que a identidade foi reconhecida, porém
+o usuário não possui autorização suficiente.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Usuário autenticado, mas sem o escopo necessário para executar
+a operação.</p>
+<p>O código 403 indica que a identidade foi reconhecida, porém
+o usuário não possui autorização suficiente.</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">404<!-- --> </strong><div html="&lt;p&gt;Cliente não encontrado para o ID informado&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Cliente não encontrado para o ID informado</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">500<!-- --> </strong><div html="&lt;p&gt;Falha inesperada no servidor ao processar a requisição&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Falha inesperada no servidor ao processar a requisição</p>
+</div></button></div></div></div><div class="sc-jSppWd sc-gKkgUA fpMlmc bdQQyo"><div class="sc-fXwuWv fYxpnv"><button class="sc-jWMFtl jzaJhV"><span type="get" class="sc-eEFuoE hlSrtW http-verb get">get</span><span class="sc-FpjRO dsIRaZ">/clientes/{id}</span><svg class="sc-dYjPD bQKUih" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-fmtEmb tUxhh"><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;Servidor de produção&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Servidor de produção</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>https://api.exemplo.com/v1</span>/clientes/{id}</div></div></div><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;Servidor de desenvolvimento&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Servidor de desenvolvimento</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>http://localhost:8080/v1</span>/clientes/{id}</div></div></div></div></div><div><h3 class="sc-kEbgWM iamDfj"> <!-- -->Response samples<!-- --> </h3><div class="sc-cxxQMU kibfTX" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-success react-tabs__tab--selected" role="tab" id="tab_R_175qa_0" aria-selected="true" aria-disabled="false" aria-controls="panel_R_175qa_0" tabindex="0" data-rttab="true">200</li><li class="tab-error" role="tab" id="tab_R_175qa_1" aria-selected="false" aria-disabled="false" aria-controls="panel_R_175qa_1" data-rttab="true">401</li><li class="tab-error" role="tab" id="tab_R_175qa_2" aria-selected="false" aria-disabled="false" aria-controls="panel_R_175qa_2" data-rttab="true">403</li><li class="tab-error" role="tab" id="tab_R_175qa_3" aria-selected="false" aria-disabled="false" aria-controls="panel_R_175qa_3" data-rttab="true">404</li><li class="tab-error" role="tab" id="tab_R_175qa_4" aria-selected="false" aria-disabled="false" aria-controls="panel_R_175qa_4" data-rttab="true">500</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel_R_175qa_0" aria-labelledby="tab_R_175qa_0"><div><div class="sc-cNSlRw bMFMGt"><span class="sc-bBzIOb BuCyN">Content type</span><div class="sc-dPqFhK kgKexQ">application/json</div></div><div class="sc-hUheUT jUCYlq"><div class="sc-cTZdpT hHzuQA"><div class="sc-giQkEn dzKJV"><button><div class="sc-jcgtOs feYhXE">Copy</div></button><button> Expand all </button><button> Collapse all </button></div><div tabindex="0" class="sc-iJSMbW fiNpIH sc-jNDflC jgTAJz"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"success"</span>: <span class="token boolean">true</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"message"</span>: <span class="token string">&quot;Cliente consultado com sucesso.&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"data"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"id"</span>: <span class="token number">101</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"nome"</span>: <span class="token string">&quot;Ana Carolina Souza&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"cpf"</span>: <span class="token string">&quot;***.456.789-**&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"telefone"</span>: <span class="token string">&quot;(11) *****-4321&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"email"</span>: <span class="token string">&quot;a***@empresa.com&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"status"</span>: <span class="token string">&quot;ATIVO&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"criadoEm"</span>: <span class="token string">&quot;2026-07-21T14:30:00Z&quot;</span></div></li></ul><span class="token punctuation">}</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_175qa_1" aria-labelledby="tab_R_175qa_1"></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_175qa_2" aria-labelledby="tab_R_175qa_2"></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_175qa_3" aria-labelledby="tab_R_175qa_3"></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_175qa_4" aria-labelledby="tab_R_175qa_4"></div></div></div></div></div></div><div id="tag/Clientes/operation/atualizarCliente" data-section-id="tag/Clientes/operation/atualizarCliente" class="sc-eCQgVK grDwca"><div data-section-id="operation/atualizarCliente" id="operation/atualizarCliente" class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/Clientes/operation/atualizarCliente" aria-label="tag/Clientes/operation/atualizarCliente"></a>Atualizar cliente<!-- --> </h2><div class="sc-iFUzrA ktZmcf"><div html="&lt;p&gt;Atualiza os dados de um cliente existente.&lt;/p&gt;
+&lt;p&gt;Exige autenticação por token JWT e o escopo &lt;code&gt;clientes.write&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Por utilizar o método PUT, o corpo da requisição deve representar
+o conjunto completo de dados atualizáveis do cliente.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV"><p>Atualiza os dados de um cliente existente.</p>
+<p>Exige autenticação por token JWT e o escopo <code>clientes.write</code>.</p>
+<p>Por utilizar o método PUT, o corpo da requisição deve representar
+o conjunto completo de dados atualizáveis do cliente.</p>
+</div></div><div class="sc-fuYIqi kGZLat"><div class="sc-dalEhJ jdqJPb"><h5 class="sc-iqkkDd sc-jQQpTv kcvrhp kEkHzF">Authorizations:</h5><svg class="sc-dYjPD bEEWJa" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></div><div class="sc-jTPGds cVAkzL"><span class="sc-dtnsVa dVYuXz"><span class="sc-hPfayn hzxDQO"><i>bearerAuth</i></span></span></div></div><div><h5 class="sc-iqkkDd kcvrhp">path<!-- --> Parameters</h5><table class="sc-hHopjF bsjUmE"><tbody><tr class="last "><td kind="field" title="id" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">id</span><div class="sc-gSILEF sc-eIYgEQ jMRTsl dHYagA">required</div></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">integer</span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ"> <!-- -->&lt;<!-- -->int64<!-- -->&gt;<!-- --> </span><span> <span class="sc-gSILEF sc-cljLBy jMRTsl enoyBT"> <!-- -->&gt;= 1<!-- --> </span></span></div> <div><span class="sc-gSILEF jMRTsl"> <!-- -->Example:<!-- --> </span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">101</span></div><div><div html="&lt;p&gt;Identificador único do cliente&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Identificador único do cliente</p>
+</div></div></div></td></tr></tbody></table></div><h5 class="sc-iqkkDd kcvrhp">Request Body schema: <span class="sc-gXvOjn kxMqOs">application/json</span><div class="sc-gSILEF sc-eIYgEQ sc-dTCDEk jMRTsl dHYagA bxWqzP">required</div></h5><div html="&lt;p&gt;Dados completos para atualização do cliente&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV"><p>Dados completos para atualização do cliente</p>
+</div><table class="sc-hHopjF bsjUmE"><tbody><tr class=""><td kind="field" title="nome" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">nome</span><div class="sc-gSILEF sc-eIYgEQ jMRTsl dHYagA">required</div></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">string</span><span> <span class="sc-gSILEF sc-cljLBy jMRTsl enoyBT"> <!-- -->[ 3 .. 150 ] characters<!-- --> </span></span></div> <div><div html="&lt;p&gt;Nome completo do cliente&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Nome completo do cliente</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="cpf" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">cpf</span><div class="sc-gSILEF sc-eIYgEQ jMRTsl dHYagA">required</div></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">string</span><span class="sc-gSILEF sc-eibAPZ jMRTsl grmBkm">^\d{3}\.\d{3}\.\d{3}-\d{2}$</span></div> <div><div html="&lt;p&gt;CPF do cliente.&lt;/p&gt;
+&lt;p&gt;O formato deve ser validado pelo servidor. A expressão regular
+verifica apenas a estrutura do valor e não substitui a validação
+dos dígitos verificadores.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>CPF do cliente.</p>
+<p>O formato deve ser validado pelo servidor. A expressão regular
+verifica apenas a estrutura do valor e não substitui a validação
+dos dígitos verificadores.</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="telefone" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">telefone</span><div class="sc-gSILEF sc-eIYgEQ jMRTsl dHYagA">required</div></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">string</span><span> <span class="sc-gSILEF sc-cljLBy jMRTsl enoyBT"> <!-- -->[ 10 .. 15 ] characters<!-- --> </span></span></div> <div><div html="&lt;p&gt;Telefone do cliente com DDD&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Telefone do cliente com DDD</p>
+</div></div></div></td></tr><tr class=""><td kind="field" title="email" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">email</span><div class="sc-gSILEF sc-eIYgEQ jMRTsl dHYagA">required</div></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">string</span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ"> <!-- -->&lt;<!-- -->email<!-- -->&gt;<!-- --> </span><span> <span class="sc-gSILEF sc-cljLBy jMRTsl enoyBT"> <!-- -->&lt;= 254 characters<!-- --> </span></span></div> <div><div html="&lt;p&gt;Endereço de e-mail do cliente&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Endereço de e-mail do cliente</p>
+</div></div></div></td></tr><tr class="last "><td kind="field" title="status" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">status</span><div class="sc-gSILEF sc-eIYgEQ jMRTsl dHYagA">required</div></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">string</span><span class="sc-gSILEF sc-jePOid jMRTsl ehlihR"> (<!-- -->StatusCliente<!-- -->) </span></div><div><span class="sc-gSILEF jMRTsl"> <!-- -->Enum<!-- -->:</span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;ATIVO&quot;</span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">&quot;INATIVO&quot;</span> </div> <div><div html="&lt;p&gt;Situação atual do cliente&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Situação atual do cliente</p>
+</div></div></div></td></tr></tbody></table><div><h3 class="sc-fINhYD hgNHCh">Responses</h3><div><button class="sc-cbuLjy iSTZHA"><svg class="sc-dYjPD gngmNp" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">200<!-- --> </strong><div html="&lt;p&gt;Cliente atualizado com sucesso&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Cliente atualizado com sucesso</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">400<!-- --> </strong><div html="&lt;p&gt;Dados enviados em formato inválido&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Dados enviados em formato inválido</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">401<!-- --> </strong><div html="&lt;p&gt;Token JWT não enviado, inválido ou expirado.&lt;/p&gt;
+&lt;p&gt;O código 401 indica que a identidade do usuário não pôde
+ser confirmada.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Token JWT não enviado, inválido ou expirado.</p>
+<p>O código 401 indica que a identidade do usuário não pôde
+ser confirmada.</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">403<!-- --> </strong><div html="&lt;p&gt;Usuário autenticado, mas sem o escopo necessário para executar
+a operação.&lt;/p&gt;
+&lt;p&gt;O código 403 indica que a identidade foi reconhecida, porém
+o usuário não possui autorização suficiente.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Usuário autenticado, mas sem o escopo necessário para executar
+a operação.</p>
+<p>O código 403 indica que a identidade foi reconhecida, porém
+o usuário não possui autorização suficiente.</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">404<!-- --> </strong><div html="&lt;p&gt;Cliente não encontrado para o ID informado&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Cliente não encontrado para o ID informado</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">500<!-- --> </strong><div html="&lt;p&gt;Falha inesperada no servidor ao processar a requisição&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Falha inesperada no servidor ao processar a requisição</p>
+</div></button></div></div></div><div class="sc-jSppWd sc-gKkgUA fpMlmc bdQQyo"><div class="sc-fXwuWv fYxpnv"><button class="sc-jWMFtl jzaJhV"><span type="put" class="sc-eEFuoE dQBYof http-verb put">put</span><span class="sc-FpjRO dsIRaZ">/clientes/{id}</span><svg class="sc-dYjPD bQKUih" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-fmtEmb tUxhh"><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;Servidor de produção&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Servidor de produção</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>https://api.exemplo.com/v1</span>/clientes/{id}</div></div></div><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;Servidor de desenvolvimento&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Servidor de desenvolvimento</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>http://localhost:8080/v1</span>/clientes/{id}</div></div></div></div></div><div><h3 class="sc-kEbgWM iamDfj"> <!-- -->Request samples<!-- --> </h3><div class="sc-cxxQMU kibfTX" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="react-tabs__tab react-tabs__tab--selected" role="tab" id="tab_R_156aa_0" aria-selected="true" aria-disabled="false" aria-controls="panel_R_156aa_0" tabindex="0" data-rttab="true">Payload</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel_R_156aa_0" aria-labelledby="tab_R_156aa_0"><div><div class="sc-cNSlRw bMFMGt"><span class="sc-bBzIOb BuCyN">Content type</span><div class="sc-dPqFhK kgKexQ">application/json</div></div><div class="sc-hUheUT jUCYlq"><div class="sc-cTZdpT hHzuQA"><div class="sc-giQkEn dzKJV"><button><div class="sc-jcgtOs feYhXE">Copy</div></button></div><div tabindex="0" class="sc-iJSMbW fiNpIH sc-jNDflC jgTAJz"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"nome"</span>: <span class="token string">&quot;Ana Carolina Souza&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"cpf"</span>: <span class="token string">&quot;123.456.789-00&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"telefone"</span>: <span class="token string">&quot;11999994321&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"email"</span>: <span class="token string">&quot;ana.carolina@empresa.com&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"status"</span>: <span class="token string">&quot;ATIVO&quot;</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div></div></div><div><h3 class="sc-kEbgWM iamDfj"> <!-- -->Response samples<!-- --> </h3><div class="sc-cxxQMU kibfTX" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-success react-tabs__tab--selected" role="tab" id="tab_R_176aa_0" aria-selected="true" aria-disabled="false" aria-controls="panel_R_176aa_0" tabindex="0" data-rttab="true">200</li><li class="tab-error" role="tab" id="tab_R_176aa_1" aria-selected="false" aria-disabled="false" aria-controls="panel_R_176aa_1" data-rttab="true">400</li><li class="tab-error" role="tab" id="tab_R_176aa_2" aria-selected="false" aria-disabled="false" aria-controls="panel_R_176aa_2" data-rttab="true">401</li><li class="tab-error" role="tab" id="tab_R_176aa_3" aria-selected="false" aria-disabled="false" aria-controls="panel_R_176aa_3" data-rttab="true">403</li><li class="tab-error" role="tab" id="tab_R_176aa_4" aria-selected="false" aria-disabled="false" aria-controls="panel_R_176aa_4" data-rttab="true">404</li><li class="tab-error" role="tab" id="tab_R_176aa_5" aria-selected="false" aria-disabled="false" aria-controls="panel_R_176aa_5" data-rttab="true">500</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel_R_176aa_0" aria-labelledby="tab_R_176aa_0"><div><div class="sc-cNSlRw bMFMGt"><span class="sc-bBzIOb BuCyN">Content type</span><div class="sc-dPqFhK kgKexQ">application/json</div></div><div class="sc-hUheUT jUCYlq"><div class="sc-cTZdpT hHzuQA"><div class="sc-giQkEn dzKJV"><button><div class="sc-jcgtOs feYhXE">Copy</div></button><button> Expand all </button><button> Collapse all </button></div><div tabindex="0" class="sc-iJSMbW fiNpIH sc-jNDflC jgTAJz"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"success"</span>: <span class="token boolean">true</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"message"</span>: <span class="token string">&quot;Cliente atualizado com sucesso.&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"data"</span>: <button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable collapsed"><span class="property token string">"id"</span>: <span class="token number">101</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"nome"</span>: <span class="token string">&quot;Ana Carolina Souza&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"cpf"</span>: <span class="token string">&quot;***.456.789-**&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"telefone"</span>: <span class="token string">&quot;(11) *****-4321&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"email"</span>: <span class="token string">&quot;a***@empresa.com&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"status"</span>: <span class="token string">&quot;ATIVO&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"criadoEm"</span>: <span class="token string">&quot;2026-07-21T14:30:00Z&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable collapsed"><span class="property token string">"atualizadoEm"</span>: <span class="token string">&quot;2026-07-21T17:45:00Z&quot;</span></div></li></ul><span class="token punctuation">}</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_176aa_1" aria-labelledby="tab_R_176aa_1"></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_176aa_2" aria-labelledby="tab_R_176aa_2"></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_176aa_3" aria-labelledby="tab_R_176aa_3"></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_176aa_4" aria-labelledby="tab_R_176aa_4"></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_176aa_5" aria-labelledby="tab_R_176aa_5"></div></div></div></div></div></div><div id="tag/Clientes/operation/removerCliente" data-section-id="tag/Clientes/operation/removerCliente" class="sc-eCQgVK grDwca"><div data-section-id="operation/removerCliente" id="operation/removerCliente" class="sc-iCECmn lhRBUS"><div class="sc-hKVpXn kktglN"><h2 class="sc-qdQOe MOVBZ"><a class="sc-crPgjm jmoZom" href="#tag/Clientes/operation/removerCliente" aria-label="tag/Clientes/operation/removerCliente"></a>Remover cliente<!-- --> </h2><div class="sc-iFUzrA ktZmcf"><div html="&lt;p&gt;Remove um cliente existente.&lt;/p&gt;
+&lt;p&gt;Exige autenticação por token JWT e o escopo &lt;code&gt;clientes.delete&lt;/code&gt;.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH ewCFMV"><p>Remove um cliente existente.</p>
+<p>Exige autenticação por token JWT e o escopo <code>clientes.delete</code>.</p>
+</div></div><div class="sc-fuYIqi kGZLat"><div class="sc-dalEhJ jdqJPb"><h5 class="sc-iqkkDd sc-jQQpTv kcvrhp kEkHzF">Authorizations:</h5><svg class="sc-dYjPD bEEWJa" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></div><div class="sc-jTPGds cVAkzL"><span class="sc-dtnsVa dVYuXz"><span class="sc-hPfayn hzxDQO"><i>bearerAuth</i></span></span></div></div><div><h5 class="sc-iqkkDd kcvrhp">path<!-- --> Parameters</h5><table class="sc-hHopjF bsjUmE"><tbody><tr class="last "><td kind="field" title="id" class="sc-hCcPtG sc-fFCZOx jFNAwF lcdEEX"><span class="sc-ieCSdj kkMuqc"></span><span class="property-name">id</span><div class="sc-gSILEF sc-eIYgEQ jMRTsl dHYagA">required</div></td><td class="sc-bjLslk gLpZiQ"><div><div><span class="sc-gSILEF sc-lbpDNm jMRTsl NncTE"></span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ">integer</span><span class="sc-gSILEF sc-iNyHtD jMRTsl kUjPnZ"> <!-- -->&lt;<!-- -->int64<!-- -->&gt;<!-- --> </span><span> <span class="sc-gSILEF sc-cljLBy jMRTsl enoyBT"> <!-- -->&gt;= 1<!-- --> </span></span></div> <div><span class="sc-gSILEF jMRTsl"> <!-- -->Example:<!-- --> </span> <span class="sc-gSILEF sc-lbFCLI jMRTsl OXDYs">101</span></div><div><div html="&lt;p&gt;Identificador único do cliente&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Identificador único do cliente</p>
+</div></div></div></td></tr></tbody></table></div><div><h3 class="sc-fINhYD hgNHCh">Responses</h3><div><button class="sc-cbuLjy iSTZHA"><svg class="sc-dYjPD gngmNp" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">200<!-- --> </strong><div html="&lt;p&gt;Cliente removido com sucesso&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Cliente removido com sucesso</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">401<!-- --> </strong><div html="&lt;p&gt;Token JWT não enviado, inválido ou expirado.&lt;/p&gt;
+&lt;p&gt;O código 401 indica que a identidade do usuário não pôde
+ser confirmada.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Token JWT não enviado, inválido ou expirado.</p>
+<p>O código 401 indica que a identidade do usuário não pôde
+ser confirmada.</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">403<!-- --> </strong><div html="&lt;p&gt;Usuário autenticado, mas sem o escopo necessário para executar
+a operação.&lt;/p&gt;
+&lt;p&gt;O código 403 indica que a identidade foi reconhecida, porém
+o usuário não possui autorização suficiente.&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Usuário autenticado, mas sem o escopo necessário para executar
+a operação.</p>
+<p>O código 403 indica que a identidade foi reconhecida, porém
+o usuário não possui autorização suficiente.</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">404<!-- --> </strong><div html="&lt;p&gt;Cliente não encontrado para o ID informado&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Cliente não encontrado para o ID informado</p>
+</div></button></div><div><button class="sc-cbuLjy cKkXxa"><svg class="sc-dYjPD hJoFRR" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg><strong class="sc-fXmTIC cqDULz">500<!-- --> </strong><div html="&lt;p&gt;Falha inesperada no servidor ao processar a requisição&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa sc-ciCrSJ fiNpIH dNfUH dDDioG"><p>Falha inesperada no servidor ao processar a requisição</p>
+</div></button></div></div></div><div class="sc-jSppWd sc-gKkgUA fpMlmc bdQQyo"><div class="sc-fXwuWv fYxpnv"><button class="sc-jWMFtl jzaJhV"><span type="delete" class="sc-eEFuoE iINwyG http-verb delete">delete</span><span class="sc-FpjRO dsIRaZ">/clientes/{id}</span><svg class="sc-dYjPD bQKUih" style="margin-right:-25px" version="1.1" viewBox="0 0 24 24" x="0" xmlns="http://www.w3.org/2000/svg" y="0" aria-hidden="true"><polygon points="17.3 8.3 12 13.6 6.7 8.3 5.3 9.7 12 16.4 18.7 9.7 "></polygon></svg></button><div aria-hidden="true" class="sc-fmtEmb tUxhh"><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;Servidor de produção&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Servidor de produção</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>https://api.exemplo.com/v1</span>/clientes/{id}</div></div></div><div class="sc-ljIcGq bAnPPh"><div html="&lt;p&gt;Servidor de desenvolvimento&lt;/p&gt;
+" class="sc-iJSMbW sc-cBEgGa fiNpIH bAoMjv"><p>Servidor de desenvolvimento</p>
+</div><div tabindex="0" role="button"><div class="sc-jlJOIR PEJyb"><span>http://localhost:8080/v1</span>/clientes/{id}</div></div></div></div></div><div><h3 class="sc-kEbgWM iamDfj"> <!-- -->Response samples<!-- --> </h3><div class="sc-cxxQMU kibfTX" data-rttabs="true"><ul class="react-tabs__tab-list" role="tablist"><li class="tab-success react-tabs__tab--selected" role="tab" id="tab_R_176qa_0" aria-selected="true" aria-disabled="false" aria-controls="panel_R_176qa_0" tabindex="0" data-rttab="true">200</li><li class="tab-error" role="tab" id="tab_R_176qa_1" aria-selected="false" aria-disabled="false" aria-controls="panel_R_176qa_1" data-rttab="true">401</li><li class="tab-error" role="tab" id="tab_R_176qa_2" aria-selected="false" aria-disabled="false" aria-controls="panel_R_176qa_2" data-rttab="true">403</li><li class="tab-error" role="tab" id="tab_R_176qa_3" aria-selected="false" aria-disabled="false" aria-controls="panel_R_176qa_3" data-rttab="true">404</li><li class="tab-error" role="tab" id="tab_R_176qa_4" aria-selected="false" aria-disabled="false" aria-controls="panel_R_176qa_4" data-rttab="true">500</li></ul><div class="react-tabs__tab-panel react-tabs__tab-panel--selected" role="tabpanel" id="panel_R_176qa_0" aria-labelledby="tab_R_176qa_0"><div><div class="sc-cNSlRw bMFMGt"><span class="sc-bBzIOb BuCyN">Content type</span><div class="sc-dPqFhK kgKexQ">application/json</div></div><div class="sc-hUheUT jUCYlq"><div class="sc-cTZdpT hHzuQA"><div class="sc-giQkEn dzKJV"><button><div class="sc-jcgtOs feYhXE">Copy</div></button></div><div tabindex="0" class="sc-iJSMbW fiNpIH sc-jNDflC jgTAJz"><div class="redoc-json"><code><button class="collapser" aria-label="collapse"></button><span class="token punctuation">{</span><span class="ellipsis"></span><ul class="obj collapsible"><li><div class="hoverable "><span class="property token string">"success"</span>: <span class="token boolean">true</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"message"</span>: <span class="token string">&quot;Cliente removido com sucesso.&quot;</span><span class="token punctuation">,</span></div></li><li><div class="hoverable "><span class="property token string">"data"</span>: <span class="token keyword">null</span></div></li></ul><span class="token punctuation">}</span></code></div></div></div></div></div></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_176qa_1" aria-labelledby="tab_R_176qa_1"></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_176qa_2" aria-labelledby="tab_R_176qa_2"></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_176qa_3" aria-labelledby="tab_R_176qa_3"></div><div class="react-tabs__tab-panel" role="tabpanel" id="panel_R_176qa_4" aria-labelledby="tab_R_176qa_4"></div></div></div></div></div></div></div><div class="sc-ekVkVN bjzTxL"></div></div></div>
+      <script>
+      const __redoc_state = {"menu":{"activeItemIdx":-1},"spec":{"data":{"openapi":"3.0.3","info":{"title":"API de Gestão de Clientes","description":"API responsável pelo cadastro, consulta, atualização e remoção de clientes.\n\nEsta API utiliza a metodologia API First: o contrato é definido antes\nda implementação do código.\n\n## Autenticação\n\nTodos os endpoints exigem um token JWT válido enviado no cabeçalho:\n\nAuthorization: Bearer {token}\n\n## Autorização por escopos\n\nAlém de estar autenticado, o usuário deve possuir o escopo necessário\npara executar cada operação:\n\n- clientes.read: consultar clientes;\n- clientes.write: cadastrar ou atualizar clientes;\n- clientes.delete: remover clientes.\n\n## Mascaramento de dados\n\nOs dados sensíveis devem ser mascarados antes de serem retornados:\n\n- nome: exibido integralmente;\n- CPF: exibido parcialmente;\n- telefone: exibido parcialmente;\n- e-mail: exibido parcialmente;\n- senha, token e credenciais: nunca devem ser retornados.\n","version":"1.0"},"servers":[{"url":"https://api.exemplo.com/v1","description":"Servidor de produção"},{"url":"http://localhost:8080/v1","description":"Servidor de desenvolvimento"}],"tags":[{"name":"Clientes","description":"Operações relacionadas à gestão de clientes"}],"paths":{"/clientes":{"get":{"tags":["Clientes"],"summary":"Listar clientes","description":"Retorna a lista de clientes cadastrados.\n\nExige autenticação por token JWT e o escopo `clientes.read`.\nOs dados sensíveis são retornados de forma parcialmente mascarada.\n","operationId":"listarClientes","security":[{"bearerAuth":[]}],"x-required-scope":"clientes.read","responses":{"200":{"description":"Lista de clientes consultada com sucesso","content":{"application/json":{"schema":{"$ref":"#/components/schemas/RespostaListaClientes"},"example":{"success":true,"message":"Clientes consultados com sucesso.","data":[{"id":101,"nome":"Ana Carolina Souza","cpf":"***.456.789-**","telefone":"(11) *****-4321","email":"a***@empresa.com","status":"ATIVO","criadoEm":"2026-07-21T14:30:00Z"},{"id":102,"nome":"Carlos Henrique Lima","cpf":"***.987.654-**","telefone":"(21) *****-7890","email":"c***@exemplo.com","status":"ATIVO","criadoEm":"2026-07-21T15:00:00Z"}]}}}},"401":{"$ref":"#/components/responses/NaoAutenticado"},"403":{"$ref":"#/components/responses/AcessoNegado"},"500":{"$ref":"#/components/responses/ErroInterno"}}},"post":{"tags":["Clientes"],"summary":"Cadastrar cliente","description":"Cadastra um novo cliente.\n\nExige autenticação por token JWT e o escopo `clientes.write`.\n\nO CPF deve possuir um formato válido e não pode estar cadastrado\nanteriormente.\n","operationId":"cadastrarCliente","security":[{"bearerAuth":[]}],"x-required-scope":"clientes.write","requestBody":{"required":true,"description":"Dados necessários para o cadastro do cliente","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ClienteEntrada"},"example":{"nome":"Ana Carolina Souza","cpf":"123.456.789-00","telefone":"11987654321","email":"ana.souza@empresa.com","status":"ATIVO"}}}},"responses":{"201":{"description":"Cliente cadastrado com sucesso","headers":{"Location":{"description":"Endereço do cliente criado","schema":{"type":"string","example":"/clientes/101"}}},"content":{"application/json":{"schema":{"$ref":"#/components/schemas/RespostaCliente"},"example":{"success":true,"message":"Cliente cadastrado com sucesso.","data":{"id":101,"nome":"Ana Carolina Souza","cpf":"***.456.789-**","telefone":"(11) *****-4321","email":"a***@empresa.com","status":"ATIVO","criadoEm":"2026-07-21T14:30:00Z"}}}}},"400":{"description":"Dados enviados em formato inválido","content":{"application/json":{"schema":{"$ref":"#/components/schemas/RespostaErro"},"examples":{"cpfInvalido":{"summary":"CPF em formato inválido","value":{"success":false,"message":"O CPF informado possui formato inválido."}},"camposObrigatorios":{"summary":"Campo obrigatório não informado","value":{"success":false,"message":"O campo nome é obrigatório."}}}}}},"401":{"$ref":"#/components/responses/NaoAutenticado"},"403":{"$ref":"#/components/responses/AcessoNegado"},"500":{"$ref":"#/components/responses/ErroInterno"}}}},"/clientes/{id}":{"parameters":[{"$ref":"#/components/parameters/ClienteId"}],"get":{"tags":["Clientes"],"summary":"Consultar cliente por ID","description":"Retorna um cliente específico.\n\nExige autenticação por token JWT e o escopo `clientes.read`.\nOs dados sensíveis são retornados de forma parcialmente mascarada.\n","operationId":"consultarClientePorId","security":[{"bearerAuth":[]}],"x-required-scope":"clientes.read","responses":{"200":{"description":"Cliente consultado com sucesso","content":{"application/json":{"schema":{"$ref":"#/components/schemas/RespostaCliente"},"example":{"success":true,"message":"Cliente consultado com sucesso.","data":{"id":101,"nome":"Ana Carolina Souza","cpf":"***.456.789-**","telefone":"(11) *****-4321","email":"a***@empresa.com","status":"ATIVO","criadoEm":"2026-07-21T14:30:00Z"}}}}},"401":{"$ref":"#/components/responses/NaoAutenticado"},"403":{"$ref":"#/components/responses/AcessoNegado"},"404":{"$ref":"#/components/responses/ClienteNaoEncontrado"},"500":{"$ref":"#/components/responses/ErroInterno"}}},"put":{"tags":["Clientes"],"summary":"Atualizar cliente","description":"Atualiza os dados de um cliente existente.\n\nExige autenticação por token JWT e o escopo `clientes.write`.\n\nPor utilizar o método PUT, o corpo da requisição deve representar\no conjunto completo de dados atualizáveis do cliente.\n","operationId":"atualizarCliente","security":[{"bearerAuth":[]}],"x-required-scope":"clientes.write","requestBody":{"required":true,"description":"Dados completos para atualização do cliente","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ClienteAtualizacao"},"example":{"nome":"Ana Carolina Souza","cpf":"123.456.789-00","telefone":"11999994321","email":"ana.carolina@empresa.com","status":"ATIVO"}}}},"responses":{"200":{"description":"Cliente atualizado com sucesso","content":{"application/json":{"schema":{"$ref":"#/components/schemas/RespostaCliente"},"example":{"success":true,"message":"Cliente atualizado com sucesso.","data":{"id":101,"nome":"Ana Carolina Souza","cpf":"***.456.789-**","telefone":"(11) *****-4321","email":"a***@empresa.com","status":"ATIVO","criadoEm":"2026-07-21T14:30:00Z","atualizadoEm":"2026-07-21T17:45:00Z"}}}}},"400":{"description":"Dados enviados em formato inválido","content":{"application/json":{"schema":{"$ref":"#/components/schemas/RespostaErro"},"example":{"success":false,"message":"O CPF informado possui formato inválido."}}}},"401":{"$ref":"#/components/responses/NaoAutenticado"},"403":{"$ref":"#/components/responses/AcessoNegado"},"404":{"$ref":"#/components/responses/ClienteNaoEncontrado"},"500":{"$ref":"#/components/responses/ErroInterno"}}},"delete":{"tags":["Clientes"],"summary":"Remover cliente","description":"Remove um cliente existente.\n\nExige autenticação por token JWT e o escopo `clientes.delete`.\n","operationId":"removerCliente","security":[{"bearerAuth":[]}],"x-required-scope":"clientes.delete","responses":{"200":{"description":"Cliente removido com sucesso","content":{"application/json":{"schema":{"$ref":"#/components/schemas/RespostaSucessoSemDados"},"example":{"success":true,"message":"Cliente removido com sucesso.","data":null}}}},"401":{"$ref":"#/components/responses/NaoAutenticado"},"403":{"$ref":"#/components/responses/AcessoNegado"},"404":{"$ref":"#/components/responses/ClienteNaoEncontrado"},"500":{"$ref":"#/components/responses/ErroInterno"}}}}},"components":{"securitySchemes":{"bearerAuth":{"type":"http","scheme":"bearer","bearerFormat":"JWT","description":"Token JWT enviado no cabeçalho HTTP Authorization.\n\nFormato:\n\nAuthorization: Bearer {token}\n"}},"parameters":{"ClienteId":{"name":"id","in":"path","required":true,"description":"Identificador único do cliente","schema":{"type":"integer","format":"int64","minimum":1},"example":101}},"responses":{"NaoAutenticado":{"description":"Token JWT não enviado, inválido ou expirado.\n\nO código 401 indica que a identidade do usuário não pôde\nser confirmada.\n","content":{"application/json":{"schema":{"$ref":"#/components/schemas/RespostaErro"},"examples":{"tokenAusente":{"summary":"Token não enviado","value":{"success":false,"message":"Token de autenticação não informado."}},"tokenInvalido":{"summary":"Token inválido","value":{"success":false,"message":"Token de autenticação inválido ou expirado."}}}}}},"AcessoNegado":{"description":"Usuário autenticado, mas sem o escopo necessário para executar\na operação.\n\nO código 403 indica que a identidade foi reconhecida, porém\no usuário não possui autorização suficiente.\n","content":{"application/json":{"schema":{"$ref":"#/components/schemas/RespostaErro"},"example":{"success":false,"message":"Você não possui permissão para executar esta operação."}}}},"ClienteNaoEncontrado":{"description":"Cliente não encontrado para o ID informado","content":{"application/json":{"schema":{"$ref":"#/components/schemas/RespostaErro"},"example":{"success":false,"message":"Cliente não encontrado."}}}},"ErroInterno":{"description":"Falha inesperada no servidor ao processar a requisição","content":{"application/json":{"schema":{"$ref":"#/components/schemas/RespostaErro"},"example":{"success":false,"message":"Ocorreu um erro interno ao processar a solicitação."}}}}},"schemas":{"ClienteEntrada":{"type":"object","additionalProperties":false,"required":["nome","cpf","telefone","email","status"],"properties":{"nome":{"type":"string","minLength":3,"maxLength":150,"description":"Nome completo do cliente","example":"Ana Carolina Souza"},"cpf":{"type":"string","description":"CPF do cliente.\n\nO formato deve ser validado pelo servidor. A expressão regular\nverifica apenas a estrutura do valor e não substitui a validação\ndos dígitos verificadores.\n","pattern":"^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$","example":"123.456.789-00"},"telefone":{"type":"string","minLength":10,"maxLength":15,"description":"Telefone do cliente com DDD","example":"11987654321"},"email":{"type":"string","format":"email","maxLength":254,"description":"Endereço de e-mail do cliente","example":"ana.souza@empresa.com"},"status":{"$ref":"#/components/schemas/StatusCliente"}}},"ClienteAtualizacao":{"allOf":[{"$ref":"#/components/schemas/ClienteEntrada"}]},"Cliente":{"type":"object","additionalProperties":false,"description":"Representação segura de um cliente.\n\nCPF, telefone e e-mail devem ser parcialmente mascarados.\nSenhas, tokens, chaves e outras credenciais nunca devem fazer\nparte desta resposta.\n","required":["id","nome","cpf","telefone","email","status","criadoEm"],"properties":{"id":{"type":"integer","format":"int64","minimum":1,"description":"Identificador único do cliente","example":101},"nome":{"type":"string","description":"Nome completo do cliente","example":"Ana Carolina Souza"},"cpf":{"type":"string","readOnly":true,"description":"CPF parcialmente mascarado","example":"***.456.789-**"},"telefone":{"type":"string","readOnly":true,"description":"Telefone parcialmente mascarado","example":"(11) *****-4321"},"email":{"type":"string","readOnly":true,"description":"E-mail parcialmente mascarado","example":"a***@empresa.com"},"status":{"$ref":"#/components/schemas/StatusCliente"},"criadoEm":{"type":"string","format":"date-time","readOnly":true,"description":"Data e hora de criação do cliente","example":"2026-07-21T14:30:00Z"},"atualizadoEm":{"type":"string","format":"date-time","nullable":true,"readOnly":true,"description":"Data e hora da última atualização","example":"2026-07-21T17:45:00Z"}}},"StatusCliente":{"type":"string","description":"Situação atual do cliente","enum":["ATIVO","INATIVO"],"example":"ATIVO"},"RespostaCliente":{"type":"object","additionalProperties":false,"required":["success","message","data"],"properties":{"success":{"type":"boolean","enum":[true],"example":true},"message":{"type":"string","example":"Cliente consultado com sucesso."},"data":{"$ref":"#/components/schemas/Cliente"}}},"RespostaListaClientes":{"type":"object","additionalProperties":false,"required":["success","message","data"],"properties":{"success":{"type":"boolean","enum":[true],"example":true},"message":{"type":"string","example":"Clientes consultados com sucesso."},"data":{"type":"array","items":{"$ref":"#/components/schemas/Cliente"}}}},"RespostaSucessoSemDados":{"type":"object","additionalProperties":false,"required":["success","message","data"],"properties":{"success":{"type":"boolean","enum":[true],"example":true},"message":{"type":"string","example":"Operação realizada com sucesso."},"data":{"nullable":true,"example":null}}},"RespostaErro":{"type":"object","additionalProperties":false,"required":["success","message"],"properties":{"success":{"type":"boolean","enum":[false],"example":false}}}}}}},"searchIndex":{"store":["section/Autenticacao","section/Autorizacao-por-escopos","section/Mascaramento-de-dados","tag/Clientes","tag/Clientes/operation/listarClientes","tag/Clientes/operation/cadastrarCliente","tag/Clientes/operation/consultarClientePorId","tag/Clientes/operation/atualizarCliente","tag/Clientes/operation/removerCliente"],"index":{"version":"2.3.9","fields":["title","description"],"fieldVectors":[["title/0",[0,0.556]],["description/0",[1,2.304,2,0.726,3,2.304,4,2.304,5,0.726,6,0.45,7,0.523,8,1.684,9,2.304,10,2.304,11,2.304,12,2.304]],["title/1",[13,1.66,14,0.252,15,0.252]],["description/1",[15,0.259,16,1.71,17,0.259,18,1.25,19,1.71,20,0.551,21,1.71,22,0.946,23,1.25,24,1.71,25,1.71,26,1.71,27,1.71,28,1.71,29,1.56,30,0.946,31,1.25,32,0.343,33,0.946,34,1.25,35,1.71,36,1.25,37,1.25,38,0.946]],["title/2",[17,0.252,39,1.66,40,0.523]],["description/2",[2,0.491,6,0.236,17,0.236,29,1.73,40,0.491,41,0.863,42,2.271,43,2.271,44,1.56,45,1.56,46,1.56,47,1.257,48,1.56,49,2.941,50,1.56,51,1.14,52,1.482,53,1.56,54,1.56,55,1.56,56,0.354,57,1.56,58,1.56]],["title/3",[32,0.297]],["description/3",[17,0.412,29,1.504,32,0.33,59,2.717,60,2.717,61,2.717]],["title/4",[32,0.24,62,1.978]],["description/4",[0,0.422,2,0.586,6,0.282,7,0.422,14,0.282,15,0.282,17,0.39,20,0.422,30,1.029,32,0.313,40,0.586,41,1.029,47,1.029,52,1.029,56,0.422,63,1.359,64,1.86,65,1.359,66,0.586,67,1.359,68,1.359,69,1.359]],["title/5",[32,0.24,34,1.445]],["description/5",[0,0.401,5,0.782,6,0.268,7,0.401,8,1.291,14,0.268,15,0.268,18,1.291,20,0.564,22,0.978,23,1.291,32,0.302,33,0.978,51,1.291,56,0.564,65,1.291,66,0.557,70,1.767,71,1.767,72,1.767,73,1.767,74,1.767,75,1.767]],["title/6",[14,0.217,31,1.044,32,0.174,76,1.429]],["description/6",[0,0.43,2,0.597,5,0.597,6,0.287,7,0.43,14,0.287,15,0.287,17,0.287,20,0.43,30,1.048,32,0.23,40,0.597,41,1.048,47,1.048,52,1.048,56,0.43,63,1.384,66,0.597,67,1.384,68,1.384,69,1.384,77,1.893,78,1.048]],["title/7",[32,0.24,36,1.445]],["description/7",[0,0.354,2,0.491,5,0.491,6,0.236,7,0.354,14,0.344,15,0.236,17,0.344,20,0.668,22,0.863,32,0.276,33,0.863,40,0.716,56,0.354,66,0.491,78,0.863,79,1.56,80,1.14,81,1.56,82,1.56,83,1.56,84,1.56,85,1.56,86,1.56,87,1.56,88,1.56,89,1.56,90,1.56]],["title/8",[32,0.24,38,1.095]],["description/8",[0,0.512,5,0.711,6,0.342,7,0.512,14,0.342,15,0.342,20,0.512,32,0.274,37,1.648,38,1.248,56,0.512,66,0.711,78,1.248,80,1.648]]],"invertedIndex":[["",{"_index":29,"title":{},"description":{"1":{},"2":{},"3":{}}}],["além",{"_index":16,"title":{},"description":{"1":{}}}],["ant",{"_index":45,"title":{},"description":{"2":{}}}],["anteriorment",{"_index":75,"title":{},"description":{"5":{}}}],["atualiza",{"_index":79,"title":{},"description":{"7":{}}}],["atualizar",{"_index":36,"title":{"7":{}},"description":{"1":{}}}],["atualizávei",{"_index":90,"title":{},"description":{"7":{}}}],["autenticado",{"_index":19,"title":{},"description":{"1":{}}}],["autenticação",{"_index":0,"title":{"0":{}},"description":{"4":{},"5":{},"6":{},"7":{},"8":{}}}],["author",{"_index":11,"title":{},"description":{"0":{}}}],["autorização",{"_index":13,"title":{"1":{}},"description":{}}],["bearer",{"_index":12,"title":{},"description":{"0":{}}}],["cabeçalho",{"_index":10,"title":{},"description":{"0":{}}}],["cada",{"_index":27,"title":{},"description":{"1":{}}}],["cadastra",{"_index":70,"title":{},"description":{"5":{}}}],["cadastrado",{"_index":65,"title":{},"description":{"4":{},"5":{}}}],["cadastrar",{"_index":34,"title":{"5":{}},"description":{"1":{}}}],["client",{"_index":32,"title":{"3":{},"4":{},"5":{},"6":{},"7":{},"8":{}},"description":{"1":{},"3":{},"4":{},"5":{},"6":{},"7":{},"8":{}}}],["clientes.delet",{"_index":37,"title":{},"description":{"1":{},"8":{}}}],["clientes.read",{"_index":30,"title":{},"description":{"1":{},"4":{},"6":{}}}],["clientes.writ",{"_index":33,"title":{},"description":{"1":{},"5":{},"7":{}}}],["clientes/{id",{"_index":78,"title":{},"description":{"6":{},"7":{},"8":{}}}],["completo",{"_index":89,"title":{},"description":{"7":{}}}],["conjunto",{"_index":88,"title":{},"description":{"7":{}}}],["consultar",{"_index":31,"title":{"6":{}},"description":{"1":{}}}],["corpo",{"_index":84,"title":{},"description":{"7":{}}}],["cpf",{"_index":51,"title":{},"description":{"2":{},"5":{}}}],["credenciai",{"_index":57,"title":{},"description":{"2":{}}}],["da",{"_index":85,"title":{},"description":{"7":{}}}],["dado",{"_index":40,"title":{"2":{}},"description":{"2":{},"4":{},"6":{},"7":{}}}],["de",{"_index":17,"title":{"2":{}},"description":{"1":{},"2":{},"3":{},"4":{},"6":{},"7":{}}}],["deve",{"_index":22,"title":{},"description":{"1":{},"5":{},"7":{}}}],["devem",{"_index":42,"title":{},"description":{"2":{}}}],["e",{"_index":56,"title":{},"description":{"2":{},"4":{},"5":{},"6":{},"7":{},"8":{}}}],["e-mail",{"_index":54,"title":{},"description":{"2":{}}}],["endpoint",{"_index":3,"title":{},"description":{"0":{}}}],["enviado",{"_index":9,"title":{},"description":{"0":{}}}],["escopo",{"_index":15,"title":{"1":{}},"description":{"1":{},"4":{},"5":{},"6":{},"7":{},"8":{}}}],["específico",{"_index":77,"title":{},"description":{"6":{}}}],["estar",{"_index":18,"title":{},"description":{"1":{},"5":{}}}],["executar",{"_index":26,"title":{},"description":{"1":{}}}],["exibido",{"_index":49,"title":{},"description":{"2":{}}}],["exig",{"_index":66,"title":{},"description":{"4":{},"5":{},"6":{},"7":{},"8":{}}}],["exigem",{"_index":4,"title":{},"description":{"0":{}}}],["existent",{"_index":80,"title":{},"description":{"7":{},"8":{}}}],["forma",{"_index":68,"title":{},"description":{"4":{},"6":{}}}],["formato",{"_index":72,"title":{},"description":{"5":{}}}],["gestão",{"_index":61,"title":{},"description":{"3":{}}}],["id",{"_index":76,"title":{"6":{}},"description":{}}],["integralment",{"_index":50,"title":{},"description":{"2":{}}}],["jwt",{"_index":7,"title":{},"description":{"0":{},"4":{},"5":{},"6":{},"7":{},"8":{}}}],["lista",{"_index":64,"title":{},"description":{"4":{}}}],["listar",{"_index":62,"title":{"4":{}},"description":{}}],["mascarada",{"_index":69,"title":{},"description":{"4":{},"6":{}}}],["mascarado",{"_index":44,"title":{},"description":{"2":{}}}],["mascaramento",{"_index":39,"title":{"2":{}},"description":{}}],["método",{"_index":82,"title":{},"description":{"7":{}}}],["necessário",{"_index":24,"title":{},"description":{"1":{}}}],["nome",{"_index":48,"title":{},"description":{"2":{}}}],["novo",{"_index":71,"title":{},"description":{"5":{}}}],["nunca",{"_index":58,"title":{},"description":{"2":{}}}],["não",{"_index":73,"title":{},"description":{"5":{}}}],["o",{"_index":20,"title":{},"description":{"1":{},"4":{},"5":{},"6":{},"7":{},"8":{}}}],["operação",{"_index":28,"title":{},"description":{"1":{}}}],["operaçõ",{"_index":59,"title":{},"description":{"3":{}}}],["os",{"_index":2,"title":{},"description":{"0":{},"2":{},"4":{},"6":{},"7":{}}}],["ou",{"_index":35,"title":{},"description":{"1":{}}}],["para",{"_index":25,"title":{},"description":{"1":{}}}],["parcialment",{"_index":52,"title":{},"description":{"2":{},"4":{},"6":{}}}],["pode",{"_index":74,"title":{},"description":{"5":{}}}],["por",{"_index":14,"title":{"1":{},"6":{}},"description":{"4":{},"5":{},"6":{},"7":{},"8":{}}}],["possuir",{"_index":23,"title":{},"description":{"1":{},"5":{}}}],["put",{"_index":83,"title":{},"description":{"7":{}}}],["relacionada",{"_index":60,"title":{},"description":{"3":{}}}],["remov",{"_index":38,"title":{"8":{}},"description":{"1":{},"8":{}}}],["representar",{"_index":87,"title":{},"description":{"7":{}}}],["requisição",{"_index":86,"title":{},"description":{"7":{}}}],["retorna",{"_index":63,"title":{},"description":{"4":{},"6":{}}}],["retornado",{"_index":47,"title":{},"description":{"2":{},"4":{},"6":{}}}],["senha",{"_index":55,"title":{},"description":{"2":{}}}],["sensívei",{"_index":41,"title":{},"description":{"2":{},"4":{},"6":{}}}],["ser",{"_index":43,"title":{},"description":{"2":{}}}],["serem",{"_index":46,"title":{},"description":{"2":{}}}],["são",{"_index":67,"title":{},"description":{"4":{},"6":{}}}],["telefon",{"_index":53,"title":{},"description":{"2":{}}}],["todo",{"_index":1,"title":{},"description":{"0":{}}}],["token",{"_index":6,"title":{},"description":{"0":{},"2":{},"4":{},"5":{},"6":{},"7":{},"8":{}}}],["um",{"_index":5,"title":{},"description":{"0":{},"5":{},"6":{},"7":{},"8":{}}}],["usuário",{"_index":21,"title":{},"description":{"1":{}}}],["utilizar",{"_index":81,"title":{},"description":{"7":{}}}],["válido",{"_index":8,"title":{},"description":{"0":{},"5":{}}}]],"pipeline":[]}},"options":{}};
 
-  # ============================================================
-  # GOVERNANÇA E DOCUMENTAÇÃO
-  # ============================================================
+      var container = document.getElementById('redoc');
+      Redoc.hydrate(__redoc_state, container);
 
-  clientes-info-version-semver:
-    description: A versão da API deve seguir versionamento semântico.
-    message: "info.version deve usar o formato X.Y ou X.Y.Z, por exemplo 1.0 ou 1.0.0."
-    severity: error
-    given: "$"
-    then:
-      field: info.version
-      function: pattern
-      functionOptions:
-        match: "^[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$"
+      </script>
+</body>
 
-  clientes-api-first-documentado:
-    description: O contrato deve declarar a adoção da metodologia API First.
-    message: "info.description deve mencionar explicitamente API First."
-    severity: warn
-    given: "$"
-    then:
-      field: info.description
-      function: pattern
-      functionOptions:
-        match: "(?i)API[ -]?First"
-
-  clientes-paths-minusculos:
-    description: Os caminhos devem usar letras minúsculas e recursos no plural.
-    message: "O caminho deve ser minúsculo, sem barra final e usar o recurso /clientes."
-    severity: error
-    given: "$.paths"
-    then:
-      field: "@key"
-      function: pattern
-      functionOptions:
-        match: "^/clientes(?:/\\{[a-z][A-Za-z0-9]*\\})?$"
-
-  clientes-operation-id-camel-case:
-    description: operationId deve usar lowerCamelCase.
-    message: "operationId deve usar lowerCamelCase, por exemplo consultarClientePorId."
-    severity: error
-    given: "$.paths.*[get,post,put,patch,delete]"
-    then:
-      field: operationId
-      function: pattern
-      functionOptions:
-        match: "^[a-z][A-Za-z0-9]*$"
-
-  clientes-operacao-com-summary:
-    description: Toda operação deve possuir um resumo.
-    message: "A operação deve declarar summary."
-    severity: error
-    given: "$.paths.*[get,post,put,patch,delete]"
-    then:
-      field: summary
-      function: truthy
-
-  clientes-operacao-com-description:
-    description: Toda operação deve explicar comportamento, segurança e resultado.
-    message: "A operação deve declarar description."
-    severity: warn
-    given: "$.paths.*[get,post,put,patch,delete]"
-    then:
-      field: description
-      function: truthy
-
-  clientes-operacao-com-tag:
-    description: Toda operação deve pertencer a uma tag documentada.
-    message: "A operação deve declarar pelo menos uma tag."
-    severity: error
-    given: "$.paths.*[get,post,put,patch,delete]"
-    then:
-      field: tags
-      function: schema
-      functionOptions:
-        schema:
-          type: array
-          minItems: 1
-          items:
-            type: string
-
-  # ============================================================
-  # AUTENTICAÇÃO JWT E AUTORIZAÇÃO POR SCOPES
-  # ============================================================
-
-  clientes-bearer-auth-definido:
-    description: O contrato deve definir autenticação HTTP Bearer com JWT.
-    message: "components.securitySchemes.bearerAuth deve usar type=http, scheme=bearer e bearerFormat=JWT."
-    severity: error
-    given: "$"
-    then:
-      field: components.securitySchemes.bearerAuth
-      function: schema
-      functionOptions:
-        schema:
-          type: object
-          required:
-            - type
-            - scheme
-            - bearerFormat
-          properties:
-            type:
-              const: http
-            scheme:
-              type: string
-              pattern: "^[Bb]earer$"
-            bearerFormat:
-              type: string
-              pattern: "^[Jj][Ww][Tt]$"
-
-  clientes-seguranca-em-todas-operacoes:
-    description: Todos os endpoints devem exigir o esquema bearerAuth.
-    message: "A operação deve declarar security com bearerAuth."
-    severity: error
-    given: "$.paths.*[get,post,put,patch,delete]"
-    then:
-      field: security
-      function: schema
-      functionOptions:
-        schema:
-          type: array
-          minItems: 1
-          items:
-            type: object
-            required:
-              - bearerAuth
-            properties:
-              bearerAuth:
-                type: array
-
-  clientes-scope-obrigatorio:
-    description: Toda operação deve documentar o scope exigido.
-    message: "Declare x-required-scope com clientes.read, clientes.write ou clientes.delete."
-    severity: error
-    given: "$.paths.*[get,post,put,patch,delete]"
-    then:
-      field: x-required-scope
-      function: truthy
-
-  clientes-scope-valido:
-    description: Apenas os scopes previstos no contrato podem ser utilizados.
-    message: "Scope inválido. Use clientes.read, clientes.write ou clientes.delete."
-    severity: error
-    given: "$.paths.*[get,post,put,patch,delete]"
-    then:
-      field: x-required-scope
-      function: pattern
-      functionOptions:
-        match: "^clientes\\.(read|write|delete)$"
-
-  clientes-get-usa-read:
-    description: Operações GET devem exigir clientes.read.
-    message: "Endpoints GET devem usar x-required-scope: clientes.read."
-    severity: error
-    given: "$.paths.*.get"
-    then:
-      field: x-required-scope
-      function: pattern
-      functionOptions:
-        match: "^clientes\\.read$"
-
-  clientes-post-usa-write:
-    description: Operações POST devem exigir clientes.write.
-    message: "Endpoints POST devem usar x-required-scope: clientes.write."
-    severity: error
-    given: "$.paths.*.post"
-    then:
-      field: x-required-scope
-      function: pattern
-      functionOptions:
-        match: "^clientes\\.write$"
-
-  clientes-put-usa-write:
-    description: Operações PUT devem exigir clientes.write.
-    message: "Endpoints PUT devem usar x-required-scope: clientes.write."
-    severity: error
-    given: "$.paths.*.put"
-    then:
-      field: x-required-scope
-      function: pattern
-      functionOptions:
-        match: "^clientes\\.write$"
-
-  clientes-patch-usa-write:
-    description: Operações PATCH devem exigir clientes.write.
-    message: "Endpoints PATCH devem usar x-required-scope: clientes.write."
-    severity: error
-    given: "$.paths.*.patch"
-    then:
-      field: x-required-scope
-      function: pattern
-      functionOptions:
-        match: "^clientes\\.write$"
-
-  clientes-delete-usa-delete:
-    description: Operações DELETE devem exigir clientes.delete.
-    message: "Endpoints DELETE devem usar x-required-scope: clientes.delete."
-    severity: error
-    given: "$.paths.*.delete"
-    then:
-      field: x-required-scope
-      function: pattern
-      functionOptions:
-        match: "^clientes\\.delete$"
-
-  # ============================================================
-  # CÓDIGOS HTTP OBRIGATÓRIOS
-  # ============================================================
-
-  clientes-respostas-seguranca-e-servidor:
-    description: Toda operação protegida deve documentar 401, 403 e 500.
-    message: "A operação deve declarar as respostas 401, 403 e 500."
-    severity: error
-    given: "$.paths.*[get,post,put,patch,delete]"
-    then:
-      field: responses
-      function: schema
-      functionOptions:
-        schema:
-          type: object
-          required:
-            - "401"
-            - "403"
-            - "500"
-
-  clientes-get-resposta-200:
-    description: Consultas devem documentar sucesso com HTTP 200.
-    message: "Operações GET devem declarar a resposta 200."
-    severity: error
-    given: "$.paths.*.get"
-    then:
-      field: responses
-      function: schema
-      functionOptions:
-        schema:
-          type: object
-          required:
-            - "200"
-
-  clientes-post-respostas-201-e-400:
-    description: Cadastros devem documentar criação e erro de validação.
-    message: "Operações POST devem declarar as respostas 201 e 400."
-    severity: error
-    given: "$.paths.*.post"
-    then:
-      field: responses
-      function: schema
-      functionOptions:
-        schema:
-          type: object
-          required:
-            - "201"
-            - "400"
-
-  clientes-put-respostas-200-400-404:
-    description: Atualizações devem documentar sucesso, validação e recurso inexistente.
-    message: "Operações PUT devem declarar as respostas 200, 400 e 404."
-    severity: error
-    given: "$.paths.*.put"
-    then:
-      field: responses
-      function: schema
-      functionOptions:
-        schema:
-          type: object
-          required:
-            - "200"
-            - "400"
-            - "404"
-
-  clientes-delete-respostas-200-404:
-    description: Remoções devem documentar sucesso e recurso inexistente.
-    message: "Operações DELETE devem declarar as respostas 200 e 404."
-    severity: error
-    given: "$.paths.*.delete"
-    then:
-      field: responses
-      function: schema
-      functionOptions:
-        schema:
-          type: object
-          required:
-            - "200"
-            - "404"
-
-  clientes-operacoes-por-id-com-404:
-    description: Operações sobre /clientes/{id} devem documentar cliente inexistente.
-    message: "Operações em /clientes/{id} devem declarar a resposta 404."
-    severity: error
-    given: "$.paths['/clientes/{id}'][get,put,patch,delete]"
-    then:
-      field: responses
-      function: schema
-      functionOptions:
-        schema:
-          type: object
-          required:
-            - "404"
-
-  # ============================================================
-  # REFERÊNCIAS PADRONIZADAS DE ERRO
-  # ============================================================
-
-  clientes-401-padronizado:
-    description: Respostas 401 devem reutilizar a definição NaoAutenticado.
-    message: "A resposta 401 deve referenciar #/components/responses/NaoAutenticado."
-    severity: error
-    resolved: false
-    given: "$.paths..responses['401']"
-    then:
-      field: "$ref"
-      function: pattern
-      functionOptions:
-        match: "^#/components/responses/NaoAutenticado$"
-
-  clientes-403-padronizado:
-    description: Respostas 403 devem reutilizar a definição AcessoNegado.
-    message: "A resposta 403 deve referenciar #/components/responses/AcessoNegado."
-    severity: error
-    resolved: false
-    given: "$.paths..responses['403']"
-    then:
-      field: "$ref"
-      function: pattern
-      functionOptions:
-        match: "^#/components/responses/AcessoNegado$"
-
-  clientes-404-padronizado:
-    description: Respostas 404 devem reutilizar a definição ClienteNaoEncontrado.
-    message: "A resposta 404 deve referenciar #/components/responses/ClienteNaoEncontrado."
-    severity: error
-    resolved: false
-    given: "$.paths..responses['404']"
-    then:
-      field: "$ref"
-      function: pattern
-      functionOptions:
-        match: "^#/components/responses/ClienteNaoEncontrado$"
-
-  clientes-500-padronizado:
-    description: Respostas 500 devem reutilizar a definição ErroInterno.
-    message: "A resposta 500 deve referenciar #/components/responses/ErroInterno."
-    severity: error
-    resolved: false
-    given: "$.paths..responses['500']"
-    then:
-      field: "$ref"
-      function: pattern
-      functionOptions:
-        match: "^#/components/responses/ErroInterno$"
-
-  clientes-erros-inline-usam-envelope:
-    description: Erros inline devem reutilizar o schema RespostaErro.
-    message: "Respostas de erro inline devem usar #/components/schemas/RespostaErro."
-    severity: error
-    resolved: false
-    given:
-      - "$.paths..responses['400'].content['application/json'].schema"
-      - "$.components.responses.*.content['application/json'].schema"
-    then:
-      field: "$ref"
-      function: pattern
-      functionOptions:
-        match: "^#/components/schemas/RespostaErro$"
-
-  # ============================================================
-  # ENVELOPES DE RESPOSTA
-  # ============================================================
-
-  clientes-envelope-erro-campos:
-    description: O envelope de erro deve exigir success e message.
-    message: "RespostaErro.required deve conter success e message."
-    severity: error
-    given: "$.components.schemas.RespostaErro.required"
-    then:
-      function: schema
-      functionOptions:
-        schema:
-          type: array
-          allOf:
-            - contains:
-                const: success
-            - contains:
-                const: message
-
-  clientes-envelope-erro-success-false:
-    description: O campo success do envelope de erro deve aceitar somente false.
-    message: "RespostaErro.properties.success.enum deve conter somente false."
-    severity: error
-    given: "$.components.schemas.RespostaErro.properties.success.enum"
-    then:
-      function: schema
-      functionOptions:
-        schema:
-          type: array
-          minItems: 1
-          maxItems: 1
-          items:
-            const: false
-
-  clientes-envelopes-sucesso-campos:
-    description: Envelopes de sucesso devem exigir success, message e data.
-    message: "Todo envelope de sucesso deve exigir success, message e data."
-    severity: error
-    given:
-      - "$.components.schemas.RespostaCliente.required"
-      - "$.components.schemas.RespostaListaClientes.required"
-      - "$.components.schemas.RespostaSucessoSemDados.required"
-    then:
-      function: schema
-      functionOptions:
-        schema:
-          type: array
-          allOf:
-            - contains:
-                const: success
-            - contains:
-                const: message
-            - contains:
-                const: data
-
-  clientes-envelopes-sucesso-true:
-    description: O campo success dos envelopes de sucesso deve aceitar somente true.
-    message: "O enum de success nos envelopes de sucesso deve conter somente true."
-    severity: error
-    given:
-      - "$.components.schemas.RespostaCliente.properties.success.enum"
-      - "$.components.schemas.RespostaListaClientes.properties.success.enum"
-      - "$.components.schemas.RespostaSucessoSemDados.properties.success.enum"
-    then:
-      function: schema
-      functionOptions:
-        schema:
-          type: array
-          minItems: 1
-          maxItems: 1
-          items:
-            const: true
-
-  clientes-get-200-envelope:
-    description: Respostas 200 de consulta devem utilizar um envelope conhecido.
-    message: "GET 200 deve usar RespostaCliente ou RespostaListaClientes."
-    severity: error
-    resolved: false
-    given: "$.paths.*.get.responses['200'].content['application/json'].schema"
-    then:
-      field: "$ref"
-      function: pattern
-      functionOptions:
-        match: "^#/components/schemas/Resposta(Cliente|ListaClientes)$"
-
-  clientes-post-201-envelope:
-    description: Respostas 201 devem utilizar RespostaCliente.
-    message: "POST 201 deve usar #/components/schemas/RespostaCliente."
-    severity: error
-    resolved: false
-    given: "$.paths.*.post.responses['201'].content['application/json'].schema"
-    then:
-      field: "$ref"
-      function: pattern
-      functionOptions:
-        match: "^#/components/schemas/RespostaCliente$"
-
-  clientes-put-200-envelope:
-    description: Respostas 200 de atualização devem utilizar RespostaCliente.
-    message: "PUT 200 deve usar #/components/schemas/RespostaCliente."
-    severity: error
-    resolved: false
-    given: "$.paths.*.put.responses['200'].content['application/json'].schema"
-    then:
-      field: "$ref"
-      function: pattern
-      functionOptions:
-        match: "^#/components/schemas/RespostaCliente$"
-
-  clientes-delete-200-envelope:
-    description: Respostas 200 de remoção devem utilizar o envelope sem dados.
-    message: "DELETE 200 deve usar #/components/schemas/RespostaSucessoSemDados."
-    severity: error
-    resolved: false
-    given: "$.paths.*.delete.responses['200'].content['application/json'].schema"
-    then:
-      field: "$ref"
-      function: pattern
-      functionOptions:
-        match: "^#/components/schemas/RespostaSucessoSemDados$"
-
-  # ============================================================
-  # MODELAGEM E VALIDAÇÃO DOS DADOS
-  # ============================================================
-
-  clientes-id-inteiro-positivo:
-    description: O parâmetro id deve ser um inteiro positivo.
-    message: "O parâmetro id deve usar type=integer e minimum=1."
-    severity: error
-    given: "$.components.parameters.ClienteId.schema"
-    then:
-      function: schema
-      functionOptions:
-        schema:
-          type: object
-          required:
-            - type
-            - minimum
-          properties:
-            type:
-              const: integer
-            minimum:
-              type: number
-              minimum: 1
-
-  clientes-cpf-entrada-com-pattern:
-    description: O CPF de entrada deve declarar validação estrutural.
-    message: "ClienteEntrada.properties.cpf deve declarar um pattern."
-    severity: error
-    given: "$.components.schemas.ClienteEntrada.properties.cpf"
-    then:
-      field: pattern
-      function: truthy
-
-  clientes-email-com-format:
-    description: O e-mail de entrada deve utilizar format email.
-    message: "ClienteEntrada.properties.email deve declarar format: email."
-    severity: error
-    given: "$.components.schemas.ClienteEntrada.properties.email"
-    then:
-      field: format
-      function: pattern
-      functionOptions:
-        match: "^email$"
-
-  clientes-objetos-sem-propriedades-extras:
-    description: Os schemas principais devem bloquear propriedades não previstas.
-    message: "O schema deve declarar additionalProperties: false."
-    severity: warn
-    given:
-      - "$.components.schemas.ClienteEntrada"
-      - "$.components.schemas.Cliente"
-      - "$.components.schemas.RespostaCliente"
-      - "$.components.schemas.RespostaListaClientes"
-      - "$.components.schemas.RespostaErro"
-    then:
-      field: additionalProperties
-      function: falsy
-
-  # ============================================================
-  # MASCARAMENTO E PROTEÇÃO DE DADOS SENSÍVEIS
-  # ============================================================
-
-  clientes-cpf-resposta-read-only:
-    description: O CPF retornado deve ser uma representação mascarada somente de leitura.
-    message: "Cliente.properties.cpf deve declarar readOnly: true."
-    severity: error
-    given: "$.components.schemas.Cliente.properties.cpf"
-    then:
-      field: readOnly
-      function: truthy
-
-  clientes-telefone-resposta-read-only:
-    description: O telefone retornado deve ser uma representação mascarada somente de leitura.
-    message: "Cliente.properties.telefone deve declarar readOnly: true."
-    severity: error
-    given: "$.components.schemas.Cliente.properties.telefone"
-    then:
-      field: readOnly
-      function: truthy
-
-  clientes-email-resposta-read-only:
-    description: O e-mail retornado deve ser uma representação mascarada somente de leitura.
-    message: "Cliente.properties.email deve declarar readOnly: true."
-    severity: error
-    given: "$.components.schemas.Cliente.properties.email"
-    then:
-      field: readOnly
-      function: truthy
-
-  clientes-cpf-exemplo-mascarado:
-    description: O exemplo de CPF retornado deve estar parcialmente mascarado.
-    message: "Use um CPF mascarado no formato ***.456.789-**."
-    severity: error
-    given: "$.components.schemas.Cliente.properties.cpf.example"
-    then:
-      function: pattern
-      functionOptions:
-        match: "^\\*{3}\\.\\d{3}\\.\\d{3}-\\*{2}$"
-
-  clientes-telefone-exemplo-mascarado:
-    description: O exemplo de telefone retornado deve estar parcialmente mascarado.
-    message: "Use um telefone mascarado no formato (11) *****-4321."
-    severity: error
-    given: "$.components.schemas.Cliente.properties.telefone.example"
-    then:
-      function: pattern
-      functionOptions:
-        match: "^\\(\\d{2}\\) \\*{5}-\\d{4}$"
-
-  clientes-email-exemplo-mascarado:
-    description: O exemplo de e-mail retornado deve estar parcialmente mascarado.
-    message: "Use um e-mail parcialmente mascarado, por exemplo a***@empresa.com."
-    severity: error
-    given: "$.components.schemas.Cliente.properties.email.example"
-    then:
-      function: pattern
-      functionOptions:
-        match: "^[^@*]+\\*+@[^@\\s]+\\.[^@\\s]+$"
-
-  clientes-nao-expor-segredos:
-    description: Senhas, tokens e credenciais não podem fazer parte dos schemas da API.
-    message: "Remova propriedades sensíveis como senha, password, token, accessToken ou refreshToken."
-    severity: error
-    given:
-      - "$.components.schemas..properties.senha"
-      - "$.components.schemas..properties.password"
-      - "$.components.schemas..properties.token"
-      - "$.components.schemas..properties.accessToken"
-      - "$.components.schemas..properties.refreshToken"
-    then:
-      function: undefined
+</html>
+Footer
+© 2026 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Community
+Docs
+Contact
+Manage cookies
+Do not share my personal information
